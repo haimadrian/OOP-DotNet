@@ -42,11 +42,5 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\C21_Ex01_UserInputUtils\C21_Ex01_UserInputUtils.csproj">
-      <Project>{359fca02-9413-4f50-a67f-93a7131a73e3}</Project>
-      <Name>C21_Ex01_UserInputUtils</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

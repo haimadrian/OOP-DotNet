@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using System.Text.RegularExpressions;
-using C21_Ex01_UserInputUtils;
 
 namespace C21_Ex01_4
 {
@@ -35,12 +34,11 @@ namespace C21_Ex01_4
 			}
 
 			Console.WriteLine(
-				string.Format(
 @"
     Analysis
 -----------------
 {0}",
-					analysisString));
+				analysisString);
 		}
 
 		private static void numericInputHandler(StringBuilder i_AnalysisString, string i_UserInput, int i_InputNumber)
@@ -99,10 +97,15 @@ Amount of uppercase characters: {1}",
 
 		private static string readUserInputSafe()
 		{
-			string userInputRequestMessage = string.Format(
-				"Please Enter {0}-characters string, consists of alphabetic characters only, or digits only: ",
-				k_InputLength);
-			return ConsoleReader.ReadUserInputWithValidation(userInputRequestMessage, isValidUserInput);
+			string userInput;
+			Console.Write("Please Enter {0}-characters string, consists of alphabetic characters only, or digits only: ", k_InputLength);
+
+			while ((userInput = Console.ReadLine()) == null || !isValidUserInput(userInput))
+			{
+				Console.Write("Illegal input. Try again: ");
+			}
+
+			return userInput;
 		}
 
 		private static bool isValidUserInput(string i_UserInput)

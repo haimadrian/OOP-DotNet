@@ -1,5 +1,4 @@
 ﻿using System;
-using C21_Ex01_UserInputUtils;
 
 namespace C21_Ex01_6
 {
@@ -17,8 +16,7 @@ namespace C21_Ex01_6
 
 		public static void RunNumberStatistics()
 		{
-			string userInputRequestMessage = string.Format("Please Enter {0}-digits natural number: ", k_InputLength);
-			string userInput = ConsoleReader.ReadUserInputWithValidation(userInputRequestMessage, isNaturalNumber);
+			string userInput = readUserInputWithValidation();
 			collectAndPrintNumberStatistics(userInput);
 		}
 
@@ -49,7 +47,6 @@ namespace C21_Ex01_6
 			int i_AmountOfDigitsLessThanRightmostDigit)
 		{
 			Console.WriteLine(
-				string.Format(
 @"
    Statistics
 -----------------
@@ -61,12 +58,25 @@ Amount of digits less than rightmost digit is: {4}",
 				i_AverageOfDigits,
 				k_DigitDividedBy,
 				i_AmountOfDigitsDividedBy,
-				i_AmountOfDigitsLessThanRightmostDigit));
+				i_AmountOfDigitsLessThanRightmostDigit);
 		}
 
 		private static bool isDigitDividedBy(byte i_NumberToTest)
 		{
 			return i_NumberToTest % k_DigitDividedBy == 0;
+		}
+
+		private static string readUserInputWithValidation()
+		{
+			string userInput;
+			Console.Write("Please Enter {0}-digits natural number: ", k_InputLength);
+
+			while ((userInput = Console.ReadLine()) == null || !isNaturalNumber(userInput))
+			{
+				Console.Write("Illegal input. Try again: ");
+			}
+
+			return userInput;
 		}
 
 		private static bool isNaturalNumber(string i_UserInput)

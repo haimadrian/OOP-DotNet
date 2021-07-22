@@ -1,5 +1,4 @@
 ﻿using System;
-using C21_Ex01_UserInputUtils;
 
 namespace C21_Ex01_3
 {
@@ -30,8 +29,14 @@ namespace C21_Ex01_3
 
 		private static int readNaturalIntFromConsole()
 		{
-			string userInputRequestMessage = "Please enter the number of lines for the sand machine: ";
-			string userInput = ConsoleReader.ReadUserInputWithValidation(userInputRequestMessage, isNaturalNumber);
+			string userInput;
+			Console.Write("Please enter the number of lines for the sand machine: ");
+
+			while ((userInput = Console.ReadLine()) == null || !isNaturalNumber(userInput))
+			{
+				Console.Write("Illegal input. Try again: ");
+			}
+			
 			return int.Parse(userInput);
 		}
 

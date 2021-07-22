@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using System.Text.RegularExpressions;
-using C21_Ex01_UserInputUtils;
 
 namespace C21_Ex01_1
 {
@@ -33,10 +32,10 @@ namespace C21_Ex01_1
 			int maximumNumber = int.MinValue;
 			int minimumNumber = int.MaxValue;
 
-			Console.WriteLine(string.Format("Please enter {0} binary numbers, with {1} digits each:", k_AmountOfBinaryNumbers, k_BinaryInputLength));
+			Console.WriteLine("Please enter {0} binary numbers, with {1} digits each:", k_AmountOfBinaryNumbers, k_BinaryInputLength);
 			for (int currentInputIndex = 0; currentInputIndex < k_AmountOfBinaryNumbers; currentInputIndex++)
 			{
-				string binaryInputString = ConsoleReader.ReadUserInputWithValidation(null, isValidBinaryString);
+				string binaryInputString = readUserInputWithValidation();
 				int inputNumber = parseBinaryStringToInt(binaryInputString);
 
 				if (numbersOutput.Length > 0)
@@ -76,7 +75,6 @@ namespace C21_Ex01_1
 			int i_MinimumNumber)
 		{
 			Console.WriteLine(
-				string.Format(
 @"
 The numbers are: {0}
 
@@ -94,7 +92,19 @@ Minimum number is: {6}",
 				i_PowersOfTwoCount,
 				i_MonotonicallyAscendingSeriesCount,
 				i_MaximumNumber,
-				i_MinimumNumber));
+				i_MinimumNumber);
+		}
+
+		private static string readUserInputWithValidation()
+		{
+			string userInput;
+
+			while ((userInput = Console.ReadLine()) == null || !isValidBinaryString(userInput))
+			{
+				Console.Write("Illegal input. Try again: ");
+			}
+
+			return userInput;
 		}
 
 		private static bool isValidBinaryString(string i_BinaryUserInput)
@@ -107,13 +117,14 @@ Minimum number is: {6}",
 		private static int parseBinaryStringToInt(string i_BinaryString)
 		{
 			int number = 0;
+			int currentPowerOfTwo = 1;
 			
-			for (int currentDigitPower = 0; currentDigitPower < i_BinaryString.Length; currentDigitPower++)
+			for (int currentDigitPower = 0; currentDigitPower < i_BinaryString.Length; currentDigitPower++, currentPowerOfTwo *= k_BinaryBase)
 			{
 				char currentDigitInRightToLeftOrder = i_BinaryString[i_BinaryString.Length - 1 - currentDigitPower];
 				if (k_BinaryInputOne == currentDigitInRightToLeftOrder)
 				{
-					number += (int)Math.Pow(k_BinaryBase, currentDigitPower);
+					number += currentPowerOfTwo;
 				}
 			}
 
