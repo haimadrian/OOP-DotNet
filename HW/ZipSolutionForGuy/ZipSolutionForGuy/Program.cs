@@ -51,7 +51,7 @@ Project(""{2150E333-8FDC-42A3-9474-1A3956D46DE8}"") = ""Solution Items"", ""Solu
 EndProject", string.Empty);
 			File.WriteAllText(solutionFilePath, text);
 
-			ZipFile.CreateFromDirectory(destinationDir, destinationArchiveFileName);
+			ZipFile.CreateFromDirectory(destinationDir, destinationArchiveFileName, new CompressionLevel(), true);
 			Console.WriteLine($"Solution zipped to: {destinationArchiveFileName}");
 
 			Console.WriteLine("Press Enter to exit.");

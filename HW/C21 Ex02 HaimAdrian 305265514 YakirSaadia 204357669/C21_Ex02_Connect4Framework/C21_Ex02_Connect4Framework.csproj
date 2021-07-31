@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F8409A53-BCFE-48F8-B214-0E11F683BE38}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>C21_Ex02_1</RootNamespace>
-    <AssemblyName>C21_Ex02_1</AssemblyName>
+    <ProjectGuid>{1FD00F3A-DD6D-4688-9406-2FD7B96449B8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>C21_Ex02_Connect4Framework</RootNamespace>
+    <AssemblyName>C21_Ex02_Connect4Framework</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <LangVersion>2</LangVersion>
     <FileAlignment>512</FileAlignment>
@@ -48,14 +48,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>C21_Ex02_1.Program</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -66,6 +68,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\C21_Ex02_Connect4Controller\C21_Ex02_Connect4Controller.csproj">
+      <Project>{004b7966-1066-4952-8ab3-ad376192f06c}</Project>
+      <Name>C21_Ex02_Connect4Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\C21_Ex02_Connect4Model\C21_Ex02_Connect4Model.csproj">
+      <Project>{f8409a53-bcfe-48f8-b214-0e11f683be38}</Project>
+      <Name>C21_Ex02_Connect4Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

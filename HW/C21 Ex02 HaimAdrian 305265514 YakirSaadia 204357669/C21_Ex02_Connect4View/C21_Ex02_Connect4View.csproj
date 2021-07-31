@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{80B7EA2E-A7B8-42D2-B2E3-3922F52379E9}</ProjectGuid>
+    <ProjectGuid>{51D7DC70-FA97-4767-9B78-1C45A5DA7786}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>C21_Ex02_4</RootNamespace>
-    <AssemblyName>C21_Ex02_4</AssemblyName>
+    <RootNamespace>C21_Ex02_Connect4View</RootNamespace>
+    <AssemblyName>C21_Ex02_Connect4View</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <LangVersion>2</LangVersion>
     <FileAlignment>512</FileAlignment>
@@ -33,14 +33,41 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>C21_Ex02_4.Program</StartupObject>
+    <StartupObject>C21_Ex02_Connect4View.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>
     </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ConnectFourApplication.cs" />
+    <Compile Include="Views\BoardView.cs" />
+    <Compile Include="Menus\CreatePlayers.cs" />
+    <Compile Include="Menus\CreateNewGame.cs" />
+    <Compile Include="Keys.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Views\eGameTool.cs" />
+    <Compile Include="Views\GameManager.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Ex02.ConsoleUtils">
+      <HintPath>..\..\..\..\..\..\..\..\temp\Ex02.ConsoleUtils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\C21_Ex02_Connect4Controller\C21_Ex02_Connect4Controller.csproj">
+      <Project>{004b7966-1066-4952-8ab3-ad376192f06c}</Project>
+      <Name>C21_Ex02_Connect4Controller</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\C21_Ex02_Connect4Framework\C21_Ex02_Connect4Framework.csproj">
+      <Project>{1fd00f3a-dd6d-4688-9406-2fd7b96449b8}</Project>
+      <Name>C21_Ex02_Connect4Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\C21_Ex02_UserInputUtils\C21_Ex02_UserInputUtils.csproj">
+      <Project>{359fca02-9413-4f50-a67f-93a7131a73e3}</Project>
+      <Name>C21_Ex02_UserInputUtils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
