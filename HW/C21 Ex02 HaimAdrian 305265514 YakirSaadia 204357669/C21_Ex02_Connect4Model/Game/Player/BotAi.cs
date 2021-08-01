@@ -10,6 +10,7 @@ namespace C21_Ex02_Connect4Model.Game.Player
 	public class BotAi<T> : Player<T>, IBot<T>
 	{
 		private const string k_PlayerId = "AI";
+		private const int k_DecisionTreeDepthPerAiLevel = 2;
 
 		private readonly Random r_MultipleBestScoresRandom;
 		private readonly int r_DepthOfDecisionTree;
@@ -19,7 +20,7 @@ namespace C21_Ex02_Connect4Model.Game.Player
 		public BotAi(eAiLevel i_AiLevel) : base(k_PlayerId, k_PlayerId)
 		{
 			r_MultipleBestScoresRandom = new Random();
-			r_DepthOfDecisionTree = 2 * (int)i_AiLevel;
+			r_DepthOfDecisionTree = k_DecisionTreeDepthPerAiLevel * (int)i_AiLevel;
 
 			Name = i_AiLevel.ToString();
 		}
