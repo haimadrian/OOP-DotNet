@@ -56,7 +56,11 @@ namespace C21_Ex02_Connect4Engine.Core.Game.Action
 			ActionsToRedo.Clear();
 		}
 
-		public TActionResult Execute<TActionResult>(eActionType i_ActionType, IInternalBoardGameEngine<T> i_GameEngine, IPlayer<T> i_Player, int? i_ColumnPlayed)
+		public TActionResult Execute<TActionResult>(
+			eActionType i_ActionType,
+			IInternalBoardGameEngine<T> i_GameEngine,
+			IPlayer<T> i_Player,
+			int? i_ColumnPlayed)
 		{
 			IActionAny<T> action = ActionFactory.NewAction<T>(i_ActionType);
 			ActionContext<T> actionContext = new ActionContext<T>(this, i_GameEngine, i_Player, i_ColumnPlayed);

@@ -213,7 +213,7 @@ namespace C21_Ex02_Connect4Engine.Core.Game.Engine
 			}
 
 			bool successfulMove = false;
-			
+
 			if (Board.TryAddGameTool(i_Column, i_Player.GameTool, out o_Move))
 			{
 				LastPlayerMove = o_Move;

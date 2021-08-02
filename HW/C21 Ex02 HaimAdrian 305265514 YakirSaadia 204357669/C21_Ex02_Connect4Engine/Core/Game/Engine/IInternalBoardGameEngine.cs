@@ -11,12 +11,7 @@ namespace C21_Ex02_Connect4Engine.Core.Game.Engine
 	/// <typeparam name="T"></typeparam>
 	internal interface IInternalBoardGameEngine<T> : IBoardGameEngine<T>
 	{
-		new Index LastPlayerMove
-		{
-			get;
-
-			set;
-		}
+		new Index LastPlayerMove { get; set; }
 
 		bool TryMakePlayerMove(IPlayer<T> i_Player, int i_Column, out Index o_Move);
 	}

@@ -40,8 +40,7 @@ namespace C21_Ex02_Connect4Console.Views
 
 		private static bool quitUndoRedoInputValidation(string i_UserInput)
 		{
-			return quitUndoInputValidation(i_UserInput) ||
-				   i_UserInput.Equals(eKeys.R.ToString(), StringComparison.InvariantCultureIgnoreCase);
+			return quitUndoInputValidation(i_UserInput) || i_UserInput.Equals(eKeys.R.ToString(), StringComparison.InvariantCultureIgnoreCase);
 		}
 
 		private IBoardGameEngine<eGameTool> GameEngine

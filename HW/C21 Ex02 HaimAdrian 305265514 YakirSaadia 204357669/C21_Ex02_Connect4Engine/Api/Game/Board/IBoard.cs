@@ -9,30 +9,15 @@ namespace C21_Ex02_Connect4Engine.Api.Game.Board
 	/// <typeparam name="T">Type of game soldiers (game tool players play with)</typeparam>
 	public interface IBoard<T>
 	{
-		T this[Index i_Index]
-		{
-			get;
-		}
+		T this[Index i_Index] { get; }
 
-		T this[int i_Row, int i_Column]
-		{
-			get;
-		}
+		T this[int i_Row, int i_Column] { get; }
 
-		int Rows
-		{
-			get;
-		}
+		int Rows { get; }
 
-		int Columns
-		{
-			get;
-		}
+		int Columns { get; }
 
-		bool IsBoardFull
-		{
-			get;
-		}
+		bool IsBoardFull { get; }
 
 		void Clear();
 

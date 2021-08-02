@@ -53,7 +53,7 @@ namespace C21_Ex02_Connect4Engine.Core.Game.Action.Impl
 
 		protected abstract TActionResult DoExecute(ActionContext<TGameToolType> i_Context);
 
-		object IActionAny<TGameToolType>.Execute(ActionContext<TGameToolType> i_Context) 
+		object IActionAny<TGameToolType>.Execute(ActionContext<TGameToolType> i_Context)
 		{
 			return Execute(i_Context);
 		}

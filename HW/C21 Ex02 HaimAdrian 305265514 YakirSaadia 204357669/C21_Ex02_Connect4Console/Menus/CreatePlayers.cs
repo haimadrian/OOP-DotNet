@@ -14,7 +14,7 @@ namespace C21_Ex02_Connect4Console.Menus
 	{
 		private const int k_MaximumUserNameLength = 26;
 		private const int k_AmountOfPlayers = 2;
-		
+
 		// Initialized lazily, only if necessary (Multi-Player)
 		private Random m_RandForMultiPlayer;
 

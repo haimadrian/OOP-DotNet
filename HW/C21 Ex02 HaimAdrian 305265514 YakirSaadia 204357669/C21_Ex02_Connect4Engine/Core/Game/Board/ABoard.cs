@@ -245,7 +245,9 @@ namespace C21_Ex02_Connect4Engine.Core.Game.Board
 
 				for (int currentColumnIndex = 0; currentColumnIndex < BoardMatrix.Columns; currentColumnIndex++)
 				{
-					string value = BoardMatrix.HasValue(currentRowIndex, currentColumnIndex) ? BoardMatrix[currentRowIndex, currentColumnIndex].ToString() : " ";
+					string value = BoardMatrix.HasValue(currentRowIndex, currentColumnIndex)
+									   ? BoardMatrix[currentRowIndex, currentColumnIndex].ToString()
+									   : " ";
 
 					// Append marking character, to mark indices based on user input
 					// This helps us mark the winner

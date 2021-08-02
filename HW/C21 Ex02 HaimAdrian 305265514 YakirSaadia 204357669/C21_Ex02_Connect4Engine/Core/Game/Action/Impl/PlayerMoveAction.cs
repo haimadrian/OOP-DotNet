@@ -7,6 +7,8 @@ namespace C21_Ex02_Connect4Engine.Core.Game.Action.Impl
 {
 	internal class PlayerMoveAction<TGameToolType> : AAction<TGameToolType, Index>
 	{
+		private const int k_DifferenceBetweenUserColumnToBoardColumn = 1;
+
 		private Index m_PlayerMove;
 		private Index m_LastPlayerMove;
 		private IPlayer<TGameToolType> m_Player;
@@ -23,7 +25,8 @@ namespace C21_Ex02_Connect4Engine.Core.Game.Action.Impl
 
 			if (!GameEngine.TryMakePlayerMove(m_Player, i_Context.ColumnPlayed, out m_PlayerMove))
 			{
-				throw new IllegalPlayerMoveException(string.Format("Unable to play at {0}. Column is full.", i_Context.ColumnPlayed));
+				throw new IllegalPlayerMoveException(
+					string.Format("Unable to play at {0}. Column is full.", i_Context.ColumnPlayed + k_DifferenceBetweenUserColumnToBoardColumn));
 			}
 
 			// In case player won, we will need to remove 1 point from its score during undo of the win.
