@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{51D7DC70-FA97-4767-9B78-1C45A5DA7786}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Ex03.GarageLogic</RootNamespace>
+    <AssemblyName>Ex03.GarageLogic</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <LangVersion>2</LangVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Api\Controllers\GarageController.cs" />
+    <Compile Include="Api\Vehicle\IVehicleVisitor.cs" />
+    <Compile Include="Core\Vehicle\Energy\Engine.cs" />
+    <Compile Include="Core\Vehicle\Energy\FuelEngine.cs" />
+    <Compile Include="Core\Vehicle\VehicleFactory.cs" />
+    <Compile Include="Api\Controllers\VehicleController.cs" />
+    <Compile Include="Api\Exceptions\WrongFuelTypeException.cs" />
+    <Compile Include="Api\Exceptions\WrongVehicleTypeException.cs" />
+    <Compile Include="Api\Exceptions\VehicleAlreadyExistsException.cs" />
+    <Compile Include="Api\Exceptions\VehicleException.cs" />
+    <Compile Include="Api\Exceptions\NoSuchVehicleException.cs" />
+    <Compile Include="Api\Exceptions\ValueOutOfRangeException.cs" />
+    <Compile Include="Api\Garage\eVehicleState.cs" />
+    <Compile Include="Api\Garage\IGarage.cs" />
+    <Compile Include="Api\Garage\IGarageVehicle.cs" />
+    <Compile Include="Api\Vehicle\Car\IFuelCar.cs" />
+    <Compile Include="Api\Vehicle\Car\IElectricCar.cs" />
+    <Compile Include="Api\Vehicle\eDoorsAmount.cs" />
+    <Compile Include="Api\Vehicle\eColor.cs" />
+    <Compile Include="Api\Vehicle\eLicenseType.cs" />
+    <Compile Include="Api\Vehicle\eFuelType.cs" />
+    <Compile Include="Api\Vehicle\Motorcycle\IElectricMotorcycle.cs" />
+    <Compile Include="Api\Vehicle\Motorcycle\IFuelMotorcycle.cs" />
+    <Compile Include="Api\Vehicle\Truck\IFuelTruck.cs" />
+    <Compile Include="Api\Vehicle\Truck\ITruck.cs" />
+    <Compile Include="Api\Vehicle\Car\ICar.cs" />
+    <Compile Include="Api\Vehicle\Motorcycle\IMotorcycle.cs" />
+    <Compile Include="Api\Vehicle\IFuelVehicle.cs" />
+    <Compile Include="Api\Vehicle\IElectricVehicle.cs" />
+    <Compile Include="Api\Vehicle\IVehicle.cs" />
+    <Compile Include="Api\Vehicle\Tire.cs" />
+    <Compile Include="Api\Exceptions\AVehicleWrongKindException.cs" />
+    <Compile Include="Api\Vehicle\VehicleType.cs" />
+    <Compile Include="Core\Garage\GarageImpl.cs" />
+    <Compile Include="Core\Garage\GarageVehicle.cs" />
+    <Compile Include="Core\Vehicle\AVehicle.cs" />
+    <Compile Include="Core\Vehicle\AFuelVehicle.cs" />
+    <Compile Include="Core\Vehicle\AElectricVehicle.cs" />
+    <Compile Include="Core\Vehicle\Car\CarSpecific.cs" />
+    <Compile Include="Core\Vehicle\Car\FuelCar.cs" />
+    <Compile Include="Core\Vehicle\Car\ElectricCar.cs" />
+    <Compile Include="Core\Vehicle\Car\CarDefaults.cs" />
+    <Compile Include="Core\Vehicle\Motorcycle\MotorcycleDefaults.cs" />
+    <Compile Include="Core\Vehicle\Motorcycle\MotorcycleSpecific.cs" />
+    <Compile Include="Core\Vehicle\Motorcycle\ElectricMotorcycle.cs" />
+    <Compile Include="Core\Vehicle\Motorcycle\FuelMotorcycle.cs" />
+    <Compile Include="Core\Vehicle\Truck\FuelTruck.cs" />
+    <Compile Include="Core\Vehicle\Truck\TruckDefaults.cs" />
+    <Compile Include="Core\Vehicle\Truck\TruckSpecific.cs" />
+    <Compile Include="Core\Vehicle\Visitors\VehicleToReportVisitor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="ClassDiagrams\Controllers and Garage.cd" />
+    <None Include="ClassDiagrams\Exceptions.cd" />
+    <None Include="ClassDiagrams\Vehicle Implementation.cd" />
+    <None Include="ClassDiagrams\Vehicle Interfaces.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

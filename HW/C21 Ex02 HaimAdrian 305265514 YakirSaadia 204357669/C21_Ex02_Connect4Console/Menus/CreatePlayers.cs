@@ -39,9 +39,29 @@ namespace C21_Ex02_Connect4Console.Menus
 				   (int.TryParse(i_UserInput, out userChoice) && (userChoice >= (int)eAiLevel.Newbie) && (userChoice <= (int)eAiLevel.Expert));
 		}
 
-		private static bool handlePcSelection(out IPlayer<eGameTool> o_PcPlayer)
+		private static bool createPlayer(out IPlayer<eGameTool> o_Player)
 		{
 			bool exit = false;
+			o_Player = null;
+
+			string userInput = ConsoleReader.ReadUserInputWithValidation(
+				string.Format("Please enter player name (up to {0} characters): ", k_MaximumUserNameLength),
+				validateUserName);
+			if (userInput.Equals(eKeys.Q.ToString(), StringComparison.InvariantCultureIgnoreCase))
+			{
+				exit = true;
+			}
+			else
+			{
+				o_Player = PlayerController.Instance.NewPlayer<eGameTool>(userInput, userInput);
+			}
+
+			return exit;
+		}
+
+		private static bool handlePcSelection(out IPlayer<eGameTool> o_FirstPlayer, out IPlayer<eGameTool> o_PcPlayer)
+		{
+			bool exit;
 
 			StringBuilder userInputRequestMessage = new StringBuilder("Please select AI level:").AppendLine();
 			foreach (eAiLevel currentAiLevel in Enum.GetValues(typeof(eAiLevel)))
@@ -56,12 +76,14 @@ namespace C21_Ex02_Connect4Console.Menus
 			if (userInput.Equals(eKeys.Q.ToString(), StringComparison.InvariantCultureIgnoreCase))
 			{
 				exit = true;
+				o_FirstPlayer = null;
 				o_PcPlayer = null;
 			}
 			else
 			{
 				eAiLevel selectedAiLevel = (eAiLevel)Enum.GetValues(typeof(eAiLevel)).GetValue(int.Parse(userInput));
 				o_PcPlayer = PlayerController.Instance.NewBot<eGameTool>(selectedAiLevel);
+				exit = createPlayer(out o_FirstPlayer);
 			}
 
 			return exit;
@@ -99,42 +121,32 @@ Q. Quit
 		private bool createPlayers(eCreatePlayersMenuItem i_SelectedMenuItem, IBoardGameEngine<eGameTool> i_GameEngine)
 		{
 			bool exit;
+			
+			IPlayer<eGameTool> firstPlayer = null;
+			IPlayer<eGameTool> secondPlayer = null;
 
-			string userInput = ConsoleReader.ReadUserInputWithValidation(
-				string.Format("Please enter your name (up to {0} characters): ", k_MaximumUserNameLength),
-				validateUserName);
-			if (userInput.Equals(eKeys.Q.ToString(), StringComparison.InvariantCultureIgnoreCase))
+			switch (i_SelectedMenuItem)
 			{
-				exit = true;
+				case eCreatePlayersMenuItem.MultiPlayer:
+					exit = handleMultiPlayerSelection(i_GameEngine, out firstPlayer, out secondPlayer);
+					break;
+				case eCreatePlayersMenuItem.Pc:
+					exit = handlePcSelection(out firstPlayer, out secondPlayer);
+					break;
+				case eCreatePlayersMenuItem.Quit:
+					exit = true;
+					break;
+				default:
+					throw new GameEngineException(string.Format("Game mode can be Multi-Player or PC only. Was: {0}", i_SelectedMenuItem.ToString()));
 			}
-			else
+
+			if (!exit)
 			{
-				IPlayer<eGameTool> firstPlayer = PlayerController.Instance.NewPlayer<eGameTool>(userInput, userInput);
-				IPlayer<eGameTool> secondPlayer = null;
+				firstPlayer.GameTool = eGameTool.O;
+				secondPlayer.GameTool = eGameTool.X;
 
-				switch (i_SelectedMenuItem)
-				{
-					case eCreatePlayersMenuItem.MultiPlayer:
-						exit = handleMultiPlayerSelection(i_GameEngine, ref firstPlayer, out secondPlayer);
-						break;
-					case eCreatePlayersMenuItem.Pc:
-						exit = handlePcSelection(out secondPlayer);
-						break;
-					case eCreatePlayersMenuItem.Quit:
-						exit = true;
-						break;
-					default:
-						throw new GameEngineException(string.Format("Game mode can be Multi-Player or PC only. Was: {0}", i_SelectedMenuItem.ToString()));
-				}
-
-				if (!exit)
-				{
-					firstPlayer.GameTool = eGameTool.O;
-					secondPlayer.GameTool = eGameTool.X;
-
-					i_GameEngine.AddPlayer(firstPlayer);
-					i_GameEngine.AddPlayer(secondPlayer);
-				}
+				i_GameEngine.AddPlayer(firstPlayer);
+				i_GameEngine.AddPlayer(secondPlayer);
 			}
 
 			return exit;
@@ -142,39 +154,33 @@ Q. Quit
 
 		private bool handleMultiPlayerSelection(
 			IBoardGameEngine<eGameTool> i_GameEngine,
-			ref IPlayer<eGameTool> io_FirstPlayer,
+			out IPlayer<eGameTool> o_FirstPlayer,
 			out IPlayer<eGameTool> o_SecondPlayer)
 		{
-			bool exit = false;
+			bool exit = createPlayer(out o_FirstPlayer);
+			o_SecondPlayer = null;
 
-			string userInput = ConsoleReader.ReadUserInputWithValidation(
-				string.Format("Please enter second player name (up to {0} characters): ", k_MaximumUserNameLength),
-				validateUserName);
-
-			if (userInput.Equals(eKeys.Q.ToString(), StringComparison.InvariantCultureIgnoreCase))
+			if (!exit)
 			{
-				o_SecondPlayer = null;
-				exit = true;
-			}
-			else
-			{
-				o_SecondPlayer = PlayerController.Instance.NewPlayer<eGameTool>(userInput, userInput);
-
-				if (m_RandForMultiPlayer == null)
+				exit = createPlayer(out o_SecondPlayer);
+				if (!exit)
 				{
-					m_RandForMultiPlayer = new Random();
-				}
+					if (m_RandForMultiPlayer == null)
+					{
+						m_RandForMultiPlayer = new Random();
+					}
 
-				// Use it like a NextBoolean().
-				// When we get 1, swap players. (Randomly choosing who starts)
-				if (m_RandForMultiPlayer.Next(k_AmountOfPlayers) > 0)
-				{
-					IPlayer<eGameTool> tempPlayer = io_FirstPlayer;
-					io_FirstPlayer = o_SecondPlayer;
-					o_SecondPlayer = tempPlayer;
-				}
+					// Use it like a NextBoolean().
+					// When we get 1, swap players. (Randomly choosing who starts)
+					if (m_RandForMultiPlayer.Next(k_AmountOfPlayers) > 0)
+					{
+						IPlayer<eGameTool> tempPlayer = o_FirstPlayer;
+						o_FirstPlayer = o_SecondPlayer;
+						o_SecondPlayer = tempPlayer;
+					}
 
-				i_GameEngine.ActivePlayer = io_FirstPlayer;
+					i_GameEngine.ActivePlayer = o_FirstPlayer;
+				}
 			}
 
 			return exit;

@@ -26,17 +26,23 @@ namespace C21_Ex02_Connect4Console.Menus
 
 			Screen.Clear();
 
-			const string v_UserInputRequestMessage = 
+			const string v_WelcomeMessage = 
 @"Create new Connect 4 Game
 =========================
 
 Welcome to Connect 4 Game.
 You may enter Q to quit at any stage.
-Undo/Redo: Enter Z to undo last move and R to redo last undone move.
+Undo/Redo: Enter Z to undo last move and R to redo last undone move.";
 
-Please enter amount of rows: ";
+			string userInputRequestMessage = string.Format(
+@"{0}
 
-			string userInput = ConsoleReader.ReadUserInputWithValidation(v_UserInputRequestMessage, validateRowsAndColsInput);
+Please enter amount of rows, between {1} to {2}: ",
+				v_WelcomeMessage,
+				k_MinimumLength,
+				k_MaximumLength);
+
+			string userInput = ConsoleReader.ReadUserInputWithValidation(userInputRequestMessage, validateRowsAndColsInput);
 			if (userInput.Equals(eKeys.Q.ToString(), StringComparison.InvariantCultureIgnoreCase))
 			{
 				exit = true;
@@ -44,7 +50,8 @@ Please enter amount of rows: ";
 			else
 			{
 				int rows = int.Parse(userInput);
-				userInput = ConsoleReader.ReadUserInputWithValidation("Please enter amount of columns: ", validateRowsAndColsInput);
+				string columnInputMessage = string.Format("Please enter amount of columns, between {0} to {1}: ", k_MinimumLength, k_MaximumLength);
+				userInput = ConsoleReader.ReadUserInputWithValidation(columnInputMessage, validateRowsAndColsInput);
 				if (userInput.Equals(eKeys.Q.ToString(), StringComparison.InvariantCultureIgnoreCase))
 				{
 					exit = true;

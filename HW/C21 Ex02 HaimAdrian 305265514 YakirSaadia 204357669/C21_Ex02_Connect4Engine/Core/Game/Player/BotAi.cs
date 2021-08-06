@@ -92,21 +92,21 @@ namespace C21_Ex02_Connect4Engine.Core.Game.Player
 				ICollection<Index> winIndices;
 				if (i_Board.OptionallyEvaluateWinner(i_LastMove, out winIndices))
 				{
-					IEnumerator<Index> winIndicesEnumerator = winIndices.GetEnumerator();
-					winIndicesEnumerator.MoveNext();
-
-					// When the winner is the AI (this player), get the result as maximizing player
-					if (GameTool.Equals(i_Board[winIndicesEnumerator.Current]))
+					using(IEnumerator<Index> winIndicesEnumerator = winIndices.GetEnumerator())
 					{
-						score = i_Depth;
-					}
-					else
-					{
-						// Otherwise, this is the minimizing player
-						score = -i_Depth;
-					}
+						winIndicesEnumerator.MoveNext();
 
-					winIndicesEnumerator.Dispose();
+						// When the winner is the AI (this player), get the result as maximizing player
+						if (GameTool.Equals(i_Board[winIndicesEnumerator.Current]))
+						{
+							score = i_Depth;
+						}
+						else
+						{
+							// Otherwise, this is the minimizing player
+							score = -i_Depth;
+						}
+					}
 				}
 				else if (!i_Board.IsBoardFull)
 				{
