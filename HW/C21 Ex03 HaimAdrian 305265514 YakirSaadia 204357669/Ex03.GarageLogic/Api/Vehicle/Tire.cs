@@ -1,4 +1,5 @@
 ﻿using Ex03.GarageLogic.Api.Exceptions;
+using Ex03.GarageLogic.Api.Utils;
 
 namespace Ex03.GarageLogic.Api.Vehicle
 {
@@ -31,6 +32,7 @@ namespace Ex03.GarageLogic.Api.Vehicle
 
 			set
 			{
+				FormatValidations.ValidateAlphaNumericFormat(value, "Manufacturer Name");
 				m_ManufacturerName = value;
 			}
 		}

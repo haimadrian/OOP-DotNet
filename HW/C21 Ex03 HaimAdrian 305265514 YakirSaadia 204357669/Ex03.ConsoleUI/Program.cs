@@ -9,7 +9,7 @@ namespace Ex03.ConsoleUI
 		{
 			try
 			{
-				GarageApplication application = new GarageApplication(true);
+				GarageApplication application = new GarageApplication();
 				application.Run();
 			}
 			catch (Exception e)

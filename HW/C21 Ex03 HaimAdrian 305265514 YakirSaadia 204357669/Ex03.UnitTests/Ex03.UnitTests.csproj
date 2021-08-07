@@ -4,14 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{359FCA02-9413-4F50-A67F-93A7131A73E3}</ProjectGuid>
+    <ProjectGuid>{E7C96003-1AE3-4B9C-B81F-14C68CB2A154}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Ex03.UserInputUtils</RootNamespace>
-    <AssemblyName>Ex03.UserInputUtils</AssemblyName>
+    <RootNamespace>Ex03.UnitTests</RootNamespace>
+    <AssemblyName>Ex03.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <LangVersion>2</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,8 +38,20 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ConsoleReader.cs" />
+    <Compile Include="FormatExceptionTest.cs" />
+    <Compile Include="GarageControllerTest.cs" />
+    <Compile Include="TestUtils.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <PackageReference Include="NUnit">
+      <Version>2.5.7.10213</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ex03.GarageLogic\Ex03.GarageLogic.csproj">
+      <Project>{51d7dc70-fa97-4767-9b78-1c45a5da7786}</Project>
+      <Name>Ex03.GarageLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

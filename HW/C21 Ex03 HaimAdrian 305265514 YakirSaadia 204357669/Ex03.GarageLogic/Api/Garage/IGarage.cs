@@ -6,7 +6,9 @@ namespace Ex03.GarageLogic.Api.Garage
 {
 	public interface IGarage
 	{
-		void AddVehicle(string i_OwnerName, string i_OwnerPhone, IVehicle i_Vehicle);
+		ICustomer GetOrCreateCustomer(string i_Name, string i_Phone);
+
+		void AddVehicle(ICustomer i_Owner, IVehicle i_Vehicle);
 
 		bool ContainsVehicle(string i_LicenseNumber);
 

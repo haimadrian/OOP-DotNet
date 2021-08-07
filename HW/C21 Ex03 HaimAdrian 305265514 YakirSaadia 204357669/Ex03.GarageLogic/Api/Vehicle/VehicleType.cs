@@ -67,5 +67,22 @@ namespace Ex03.GarageLogic.Api.Vehicle
 				return r_Type;
 			}
 		}
+
+		public override int GetHashCode()
+		{
+			return Type.GetHashCode();
+		}
+
+		public override bool Equals(object i_Another)
+		{
+			bool equals = false;
+
+			if (i_Another is VehicleType)
+			{
+				equals = Type == ((VehicleType)i_Another).Type;
+			}
+
+			return equals;
+		}
 	}
 }

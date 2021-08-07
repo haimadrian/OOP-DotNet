@@ -33,9 +33,14 @@ namespace Ex03.GarageLogic.Api.Controllers
 			}
 		}
 
-		public void AddVehicle(string i_OwnerName, string i_OwnerPhone, IVehicle i_Vehicle)
+		public ICustomer GetOrCreateCustomer(string i_Name, string i_Phone)
 		{
-			Garage.AddVehicle(i_OwnerName, i_OwnerPhone, i_Vehicle);
+			return Garage.GetOrCreateCustomer(i_Name, i_Phone);
+		}
+
+		public void AddVehicle(ICustomer i_Owner, IVehicle i_Vehicle)
+		{
+			Garage.AddVehicle(i_Owner, i_Vehicle);
 		}
 
 		public bool ContainsVehicle(string i_LicenseNumber)

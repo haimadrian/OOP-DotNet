@@ -6,9 +6,7 @@ namespace Ex03.GarageLogic.Api.Garage
 	{
 		IVehicle Vehicle { get; }
 
-		string OwnerName { get; }
-
-		string OwnerPhone { get; }
+		ICustomer Owner { get; }
 
 		eVehicleState VehicleState { get; }
 	}

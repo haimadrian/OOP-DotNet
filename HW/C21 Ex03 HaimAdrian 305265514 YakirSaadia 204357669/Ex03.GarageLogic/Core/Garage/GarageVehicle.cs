@@ -1,21 +1,18 @@
-﻿using System;
-using Ex03.GarageLogic.Api.Garage;
+﻿using Ex03.GarageLogic.Api.Garage;
 using Ex03.GarageLogic.Api.Vehicle;
 
 namespace Ex03.GarageLogic.Core.Garage
 {
 	internal class GarageVehicle : IGarageVehicle
 	{
-		private readonly string r_OwnerName;
-		private readonly string r_OwnerPhone;
+		private readonly ICustomer r_Owner;
 		private readonly IVehicle r_Vehicle;
 		private eVehicleState m_VehicleState;
 
-		public GarageVehicle(string i_OwnerName, string i_OwnerPhone, IVehicle i_Vehicle)
+		public GarageVehicle(ICustomer i_Owner, IVehicle i_Vehicle)
 		{
 			r_Vehicle = i_Vehicle;
-			r_OwnerName = i_OwnerName;
-			r_OwnerPhone = i_OwnerPhone;
+			r_Owner = i_Owner;
 			VehicleState = eVehicleState.Repairing;
 		}
 
@@ -27,19 +24,11 @@ namespace Ex03.GarageLogic.Core.Garage
 			}
 		}
 
-		public string OwnerName
+		public ICustomer Owner
 		{
 			get
 			{
-				return r_OwnerName;
-			}
-		}
-
-		public string OwnerPhone
-		{
-			get
-			{
-				return r_OwnerPhone;
+				return r_Owner;
 			}
 		}
 
@@ -56,13 +45,13 @@ namespace Ex03.GarageLogic.Core.Garage
 			}
 		}
 
-		public static bool operator ==(GarageVehicle i_Vehicle1, GarageVehicle i_Vehicle2)
+		public static bool operator ==(GarageVehicle i_Vehicle1, IGarageVehicle i_Vehicle2)
 		{
 			return (ReferenceEquals(i_Vehicle1, null) && ReferenceEquals(i_Vehicle2, null)) ||
 				   (!ReferenceEquals(i_Vehicle1, null) && i_Vehicle1.Equals(i_Vehicle2));
 		}
 
-		public static bool operator !=(GarageVehicle i_Vehicle1, GarageVehicle i_Vehicle2)
+		public static bool operator !=(GarageVehicle i_Vehicle1, IGarageVehicle i_Vehicle2)
 		{
 			return !(i_Vehicle1 == i_Vehicle2);
 		}
@@ -71,7 +60,7 @@ namespace Ex03.GarageLogic.Core.Garage
 		{
 			bool equals = false;
 
-			GarageVehicle anotherGarageVehicle = i_Another as GarageVehicle;
+			IGarageVehicle anotherGarageVehicle = i_Another as IGarageVehicle;
 			if (!ReferenceEquals(anotherGarageVehicle, null))
 			{
 				// Compare by vehicle
@@ -92,7 +81,7 @@ namespace Ex03.GarageLogic.Core.Garage
 
 		public override string ToString()
 		{
-			return string.Format("VehicleStatus={0}, OwnerName={1}, OwnerPhone={2}, Vehicle={3}", VehicleState.ToString(), OwnerName, OwnerPhone, Vehicle);
+			return string.Format("VehicleStatus={0}, Owner=({1}), Vehicle={2}", VehicleState.ToString(), Owner, Vehicle);
 		}
 	}
 }

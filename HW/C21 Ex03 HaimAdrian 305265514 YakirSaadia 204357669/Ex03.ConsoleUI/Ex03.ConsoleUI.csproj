@@ -41,11 +41,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App\GarageApplication.cs" />
+    <Compile Include="App\Menus\AMenu.cs" />
+    <Compile Include="App\Menus\ConsoleMenuManager.cs" />
+    <Compile Include="App\Menus\AddVehicleMenu.cs" />
+    <Compile Include="App\Menus\Model\eMenuItem.cs" />
+    <Compile Include="App\Menus\MainMenu.cs" />
+    <Compile Include="App\Menus\Model\MenuItem.cs" />
+    <Compile Include="App\Menus\Model\MenuItemGroup.cs" />
+    <Compile Include="App\Reflection\ReflectionUtils.cs" />
+    <Compile Include="App\Utils\CollectionUtils.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App\Menus\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Ex03.GarageLogic\Ex03.GarageLogic.csproj">
       <Project>{51d7dc70-fa97-4767-9b78-1c45a5da7786}</Project>

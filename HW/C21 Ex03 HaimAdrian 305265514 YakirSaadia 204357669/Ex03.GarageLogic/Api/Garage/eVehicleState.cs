@@ -2,7 +2,7 @@
 {
 	public enum eVehicleState
 	{
-		Repairing,
+		Repairing = 1,
 
 		Repaired,
 

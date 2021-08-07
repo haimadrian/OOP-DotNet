@@ -1,0 +1,11 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=59182834_002D72e5_002D4725_002Dafb8_002De14709bcb015/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from GarageControllerTest.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;ProjectFile&gt;E7C96003-1AE3-4B9C-B81F-14C68CB2A154/f:GarageControllerTest.cs&lt;/ProjectFile&gt;&#xD;
+    &lt;ProjectFile&gt;E7C96003-1AE3-4B9C-B81F-14C68CB2A154/f:FormatExceptionTest.cs&lt;/ProjectFile&gt;&#xD;
+  &lt;/Or&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d197521b_002D975e_002D4216_002D8b16_002D5161d0a50df0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from GarageControllerTest.cs #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;ProjectFile&gt;E7C96003-1AE3-4B9C-B81F-14C68CB2A154/f:GarageControllerTest.cs&lt;/ProjectFile&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

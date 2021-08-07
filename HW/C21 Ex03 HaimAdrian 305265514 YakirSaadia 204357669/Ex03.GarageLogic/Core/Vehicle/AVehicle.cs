@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Ex03.GarageLogic.Api.Vehicle;
+using Ex03.GarageLogic.Api.Utils;
 using Ex03.GarageLogic.Core.Vehicle.Energy;
 
 namespace Ex03.GarageLogic.Core.Vehicle
@@ -17,6 +18,9 @@ namespace Ex03.GarageLogic.Core.Vehicle
 
 		protected AVehicle(string i_Brand, string i_LicenseNumber, TEngineType i_Engine)
 		{
+			FormatValidations.ValidateAlphaNumericFormat(i_Brand, "Brand");
+			FormatValidations.ValidateAlphaNumericFormat(i_LicenseNumber, "License Number");
+			
 			r_Brand = i_Brand.Trim();
 			r_LicenseNumber = i_LicenseNumber.Trim();
 			r_Engine = i_Engine;
