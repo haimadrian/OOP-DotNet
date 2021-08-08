@@ -44,12 +44,15 @@
     <Compile Include="App\Menus\AMenu.cs" />
     <Compile Include="App\Menus\ConsoleMenuManager.cs" />
     <Compile Include="App\Menus\AddVehicleMenu.cs" />
+    <Compile Include="App\Menus\UpdateVehicleGarageStateMenu.cs" />
+    <Compile Include="App\Menus\ListVehiclesLicenseNumberMenu.cs" />
     <Compile Include="App\Menus\Model\eMenuItem.cs" />
     <Compile Include="App\Menus\MainMenu.cs" />
     <Compile Include="App\Menus\Model\MenuItem.cs" />
     <Compile Include="App\Menus\Model\MenuItemGroup.cs" />
     <Compile Include="App\Reflection\ReflectionUtils.cs" />
     <Compile Include="App\Utils\CollectionUtils.cs" />
+    <Compile Include="App\Utils\eKeys.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup />
@@ -62,6 +65,9 @@
       <Project>{359fca02-9413-4f50-a67f-93a7131a73e3}</Project>
       <Name>Ex03.UserInputUtils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram\UI.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

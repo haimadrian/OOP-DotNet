@@ -2,7 +2,9 @@
 using System.Reflection;
 using Ex03.ConsoleUI.App.Menus.Model;
 using Ex03.ConsoleUI.App.Reflection;
+using Ex03.ConsoleUI.App.Utils;
 using Ex03.GarageLogic.Api.Controllers;
+using Ex03.GarageLogic.Api.Exceptions;
 using Ex03.GarageLogic.Api.Utils;
 using Ex03.GarageLogic.Api.Vehicle;
 using Ex03.UserInputUtils;
@@ -34,15 +36,6 @@ namespace Ex03.ConsoleUI.App.Menus
 			}
 		}
 
-		public VehicleType Show()
-		{
-			const bool v_ClearConsole = true;
-
-			VehicleType selectedMenuItem = Show(v_ClearConsole);
-
-			return selectedMenuItem;
-		}
-
 		private void onMenuItemChosen(MenuItem<VehicleType> i_Menuitem)
 		{
 			bool tryAgain;
@@ -63,8 +56,11 @@ namespace Ex03.ConsoleUI.App.Menus
 				}
 				catch (FormatException e)
 				{
-					tryAgain = true;
-					Console.WriteLine("Wrong input. Reason: {0}", e.Message);
+					tryAgain = HandleErrorAndAskForRetry("Wrong input. Reason: ", e);
+				}
+				catch (VehicleAlreadyExistsException e)
+				{
+					tryAgain = HandleErrorAndAskForRetry(string.Empty, e);
 				}
 			}
 			while (tryAgain);

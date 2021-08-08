@@ -38,9 +38,8 @@ namespace Ex03.UserInputUtils
 			{
 				inputMessage.AppendLine("Please select one of the choices below:");
 			}
-
-			Array enumItems = Enum.GetValues(i_EnumType);
-			foreach (int currentItem in enumItems)
+			
+			foreach (int currentItem in Enum.GetValues(i_EnumType))
 			{
 				inputMessage.Append(currentItem).Append(". ").AppendLine(Enum.ToObject(i_EnumType, currentItem).ToString());
 			}
@@ -64,7 +63,7 @@ namespace Ex03.UserInputUtils
 			{
 				try
 				{
-					Enum.ToObject(i_EnumType, choice);
+					isValid = Enum.IsDefined(i_EnumType, choice);
 				}
 				catch (Exception)
 				{

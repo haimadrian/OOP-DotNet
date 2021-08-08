@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Ex03.ConsoleUI.App.Menus.Model;
-using Ex03.ConsoleUI.App.Utils;
 using Ex03.GarageLogic.Api.Controllers;
 using Ex03.GarageLogic.Api.Exceptions;
-using Ex03.GarageLogic.Api.Garage;
-using Ex03.GarageLogic.Api.Utils;
+using Ex03.GarageLogic.Api.Vehicle;
 using Ex03.UserInputUtils;
 
 namespace Ex03.ConsoleUI.App.Menus
@@ -15,7 +12,12 @@ namespace Ex03.ConsoleUI.App.Menus
 	{
 		private const string k_WelcomeMessage = "Welcome to Garage Application";
 
-		private const int k_MinChoice = 1;
+		private static readonly IDictionary<eMenuItem, object> sr_ExpandedMenus;
+
+		static MainMenu()
+		{
+			sr_ExpandedMenus = new Dictionary<eMenuItem, object>();
+		}
 
 		private static void doBeforeMenu()
 		{
@@ -28,16 +30,160 @@ namespace Ex03.ConsoleUI.App.Menus
 			Console.ReadLine();
 		}
 
-		private static string readLicenseNumberForActions()
+		private static TMenuType computeExpandedMenuIfMissing<TMenuType>(eMenuItem i_MenuItem)
 		{
-			return ConsoleReader.ReadUserInputWithValidation("Please enter license number: ", FormatValidations.IsAlphaNumeric);
+			if (!sr_ExpandedMenus.ContainsKey(i_MenuItem))
+			{
+				sr_ExpandedMenus[i_MenuItem] = Activator.CreateInstance(typeof(TMenuType));
+			}
+
+			return (TMenuType)sr_ExpandedMenus[i_MenuItem];
 		}
 
-		private static bool isValidVehicleStatus(string i_InputString)
+		private static void onAddVehicleMenuItemChosen(MenuItem<eMenuItem> i_MenuItem)
 		{
-			int maxChoice = Enum.GetValues(typeof(eVehicleState)).Length + 1;
-			int choice;
-			return !string.IsNullOrEmpty(i_InputString) && int.TryParse(i_InputString, out choice) && (choice >= k_MinChoice) && (choice <= maxChoice);
+			doBeforeMenu();
+
+			computeExpandedMenuIfMissing<AddVehicleMenu>(i_MenuItem.Item).Show();
+
+			doAfterMenu();
+		}
+
+		private static void onListVehicleLicenseNumbersMenuItemChosen(MenuItem<eMenuItem> i_MenuItem)
+		{
+			doBeforeMenu();
+
+			computeExpandedMenuIfMissing<ListVehiclesLicenseNumberMenu>(i_MenuItem.Item).Show();
+
+			doAfterMenu();
+		}
+
+		private static void onUpdateVehicleGarageStateMenuItemChosen(MenuItem<eMenuItem> i_MenuItem)
+		{
+			doBeforeMenu();
+
+			computeExpandedMenuIfMissing<UpdateVehicleGarageStateMenu>(i_MenuItem.Item).Show();
+
+			doAfterMenu();
+		}
+
+		private static void onFullyInflateVehicleTiresMenuItemChosen(MenuItem<eMenuItem> i_MenuItem)
+		{
+			doBeforeMenu();
+
+			bool tryAgain;
+			do
+			{
+				try
+				{
+					string licenseNumber = ReadLicenseNumberForActions();
+					GarageController.Instance.FullyInflateTiresOfVehicle(licenseNumber);
+					tryAgain = false;
+				}
+				catch (NoSuchVehicleException e)
+				{
+					tryAgain = HandleErrorAndAskForRetry("Wrong input. Reason: ", e);
+				}
+			}
+			while (tryAgain);
+
+			doAfterMenu();
+		}
+
+		private static void onRefuelVehicleMenuItemChosen(MenuItem<eMenuItem> i_MenuItem)
+		{
+			doBeforeMenu();
+
+			bool tryAgain;
+			do
+			{
+				try
+				{
+					string licenseNumber = ReadLicenseNumberForActions();
+					eFuelType selectedFuelType = (eFuelType)ConsoleReader.ReadEnumInputWithValidation("Please select fuel type: ", typeof(eFuelType));
+
+					string userInput = ConsoleReader.ReadUserInputWithValidation("Please enter amount of liters to fill: ", isFloatInput);
+
+					GarageController.Instance.RefuelVehicle(licenseNumber, selectedFuelType, float.Parse(userInput));
+					tryAgain = false;
+				}
+				catch (Exception e)
+				{
+					tryAgain = HandleErrorAndAskForRetry("Failed to refuel vehicle. Reason: ", e);
+				}
+			}
+			while (tryAgain);
+
+			doAfterMenu();
+		}
+
+		private static void onRechargeVehicleMenuItemChosen(MenuItem<eMenuItem> i_MenuItem)
+		{
+			doBeforeMenu();
+
+			bool tryAgain;
+			do
+			{
+				try
+				{
+					string licenseNumber = ReadLicenseNumberForActions();
+
+					string userInput = ConsoleReader.ReadUserInputWithValidation("Please enter how many minutes to fill: ", isFloatInput);
+
+					GarageController.Instance.RechargeVehicle(licenseNumber, float.Parse(userInput));
+					tryAgain = false;
+				}
+				catch (Exception e)
+				{
+					tryAgain = HandleErrorAndAskForRetry("Failed to refuel vehicle. Reason: ", e);
+				}
+			}
+			while (tryAgain);
+
+			doAfterMenu();
+		}
+
+		private static void onPrintVehicleReportMenuItemChosen(MenuItem<eMenuItem> i_MenuItem)
+		{
+			doBeforeMenu();
+
+			bool tryAgain;
+			do
+			{
+				try
+				{
+					string licenseNumber = ReadLicenseNumberForActions();
+					Console.WriteLine(GarageController.Instance.GetVehicleReport(licenseNumber));
+					tryAgain = false;
+				}
+				catch (NoSuchVehicleException e)
+				{
+					tryAgain = HandleErrorAndAskForRetry("Failed to print vehicle report. Reason: ", e);
+				}
+			}
+			while (tryAgain);
+
+			doAfterMenu();
+		}
+
+		private static void onPrintAllVehicleReportMenuItemChosen(MenuItem<eMenuItem> i_Menuitem)
+		{
+			doBeforeMenu();
+
+			ICollection<string> allLicenseNumbers = GarageController.Instance.CollectLicenseNumbers(null);
+
+			foreach (string currentLicenseNumber in allLicenseNumbers)
+			{
+				Console.WriteLine("{0}{1}", GarageController.Instance.GetVehicleReport(currentLicenseNumber), Environment.NewLine);
+			}
+
+			doAfterMenu();
+		}
+
+		private static bool isFloatInput(string i_InputString)
+		{
+			float ignore;
+			return !string.IsNullOrEmpty(i_InputString) && float.TryParse(i_InputString, out ignore);
 		}
 
 		protected override string MenuTitle
@@ -61,116 +207,17 @@ namespace Ex03.ConsoleUI.App.Menus
 			MenuItemGroup.Add(eMenuItem.Exit, null, null);
 		}
 
-		public eMenuItem Show()
+		public override eMenuItem Show()
 		{
 			eMenuItem selectedMenuItem;
-			const bool v_ClearConsole = true;
 
 			do
 			{
-				selectedMenuItem = Show(v_ClearConsole);
+				selectedMenuItem = base.Show();
 			}
 			while (selectedMenuItem != eMenuItem.Exit);
 
 			return selectedMenuItem;
-		}
-
-		private void onAddVehicleMenuItemChosen(MenuItem<eMenuItem> i_MenuItem)
-		{
-			doBeforeMenu();
-
-			new AddVehicleMenu().Show();
-
-			doAfterMenu();
-		}
-
-		private void onListVehicleLicenseNumbersMenuItemChosen(MenuItem<eMenuItem> i_MenuItem)
-		{
-			doBeforeMenu();
-
-			StringBuilder inputMessage = new StringBuilder("Please select vehicle status:").AppendLine();
-			Array statuses = Enum.GetValues(typeof(eVehicleState));
-
-			foreach (eVehicleState currentStatus in statuses)
-			{
-				inputMessage.Append((int)currentStatus).Append(". ").AppendLine(currentStatus.ToString());
-			}
-
-			inputMessage.Append(statuses.Length + 1).AppendLine(". All");
-
-			string userInput = ConsoleReader.ReadUserInputWithValidation(inputMessage.ToString(), isValidVehicleStatus);
-			int userChoice = int.Parse(userInput);
-			Predicate<eVehicleState> filter = null;
-
-			if (userChoice <= statuses.Length)
-			{
-				eVehicleState stateToFilter = (eVehicleState)Enum.ToObject(typeof(eVehicleState), userChoice);
-				filter = delegate(eVehicleState i_State) { return stateToFilter == i_State; };
-			}
-
-			Console.WriteLine("License numbers:{1}{2}", Environment.NewLine, CollectionUtils.ToString(GarageController.Instance.CollectLicenseNumbers(filter)));
-
-			doAfterMenu();
-		}
-
-		private void onUpdateVehicleGarageStateMenuItemChosen(MenuItem<eMenuItem> i_Menuitem)
-		{
-			doBeforeMenu();
-
-			doAfterMenu();
-		}
-
-		private void onFullyInflateVehicleTiresMenuItemChosen(MenuItem<eMenuItem> i_Menuitem)
-		{
-			doBeforeMenu();
-
-			doAfterMenu();
-		}
-
-		private void onRefuelVehicleMenuItemChosen(MenuItem<eMenuItem> i_Menuitem)
-		{
-			doBeforeMenu();
-
-			doAfterMenu();
-		}
-
-		private void onRechargeVehicleMenuItemChosen(MenuItem<eMenuItem> i_Menuitem)
-		{
-			doBeforeMenu();
-
-			doAfterMenu();
-		}
-
-		private void onPrintVehicleReportMenuItemChosen(MenuItem<eMenuItem> i_Menuitem)
-		{
-			doBeforeMenu();
-
-			string licenseNumber = readLicenseNumberForActions();
-
-			try
-			{
-				Console.WriteLine(GarageController.Instance.GetVehicleReport(licenseNumber));
-			}
-			catch (NoSuchVehicleException e)
-			{
-				Console.WriteLine("Failed to print vehicle report. Reason: {0}", e.Message);
-			}
-
-			doAfterMenu();
-		}
-
-		private void onPrintAllVehicleReportMenuItemChosen(MenuItem<eMenuItem> i_Menuitem)
-		{
-			doBeforeMenu();
-
-			ICollection<string> allLicenseNumbers = GarageController.Instance.CollectLicenseNumbers(null);
-
-			foreach (string currentLicenseNumber in allLicenseNumbers)
-			{
-				Console.WriteLine("{0}{1}", GarageController.Instance.GetVehicleReport(currentLicenseNumber), Environment.NewLine);
-			}
-
-			doAfterMenu();
 		}
 	}
 }
