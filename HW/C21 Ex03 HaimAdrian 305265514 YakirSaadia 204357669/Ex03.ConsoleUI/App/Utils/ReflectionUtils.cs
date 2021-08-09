@@ -1,26 +1,35 @@
 ﻿using System;
 using System.Reflection;
-using System.Text;
+using Ex03.GarageLogic.Api.Utils;
 using Ex03.UserInputUtils;
 
-namespace Ex03.ConsoleUI.App.Reflection
+namespace Ex03.ConsoleUI.App.Utils
 {
 	internal static class ReflectionUtils
 	{
 		public static void FillInPublicInstancePropertiesFromConsole(object i_Object)
 		{
-			PropertyInfo[] vehicleTypes = i_Object.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+			const bool v_IsPublicSetterOnly = true;
+			const bool v_ShowExistingValue = true;
 
-			foreach (PropertyInfo currentProperty in vehicleTypes)
+			FillInInstancePropertiesFromConsole(i_Object, v_IsPublicSetterOnly, !v_ShowExistingValue);
+		}
+
+		public static void FillInInstancePropertiesFromConsole(object i_Object, bool i_IsPublicSetterOnly, bool i_ShowExistingValue)
+		{
+			PropertyInfo[] vehicleProperties = i_Object.GetType().GetProperties();
+
+			foreach (PropertyInfo currentProperty in vehicleProperties)
 			{
-				if (currentProperty.CanWrite)
+				MethodInfo setter = currentProperty.GetSetMethod(!i_IsPublicSetterOnly);
+				if ((setter != null) && !setter.IsStatic && (!i_IsPublicSetterOnly || setter.IsPublic))
 				{
 					bool tryAgain;
 					do
 					{
 						try
 						{
-							object value = ReadInputForProperty(currentProperty);
+							object value = ReadInputForProperty(i_Object, currentProperty, i_ShowExistingValue);
 							currentProperty.SetValue(i_Object, value, null);
 							tryAgain = false;
 						}
@@ -35,11 +44,12 @@ namespace Ex03.ConsoleUI.App.Reflection
 			}
 		}
 
-		public static object ReadInputForProperty(PropertyInfo i_Property)
+		public static object ReadInputForProperty(object i_Object, PropertyInfo i_Property, bool i_ShowExistingValue)
 		{
 			object value;
-			string propertyName = splitStringByCapitalLetters(i_Property.Name);
-			string inputMessage = string.Format("Please enter {0}: ", propertyName);
+			string propertyName = GetMemberDisplayName(i_Property);
+			string existingValue = i_ShowExistingValue ? getPropertyValueAsString(i_Object, i_Property) : string.Empty;
+			string inputMessage = string.Format("Please enter {0}: {1}", propertyName, existingValue);
 
 			do
 			{
@@ -58,7 +68,9 @@ namespace Ex03.ConsoleUI.App.Reflection
 				}
 				else if (propertyType == typeof(bool))
 				{
-					userInput = ConsoleReader.ReadUserInputWithValidation(inputMessage, isBoolean);
+					userInput = ConsoleReader.ReadUserInputWithValidation(
+						string.Format("{0}({1}/{2}) ", inputMessage, bool.TrueString, bool.FalseString),
+						isBoolean);
 					value = bool.Parse(userInput);
 				}
 				else if (propertyType == typeof(double))
@@ -83,7 +95,7 @@ namespace Ex03.ConsoleUI.App.Reflection
 				}
 				else if (propertyType.IsEnum)
 				{
-					value = ConsoleReader.ReadEnumInputWithValidation(string.Format("Please select {0}:", propertyName), propertyType);
+					value = ConsoleReader.ReadEnumInputWithValidation(string.Format("Please select {0}: {1}", propertyName, existingValue), propertyType);
 				}
 				else if (propertyType.IsValueType)
 				{
@@ -101,21 +113,27 @@ namespace Ex03.ConsoleUI.App.Reflection
 			return value;
 		}
 
-		private static string splitStringByCapitalLetters(string i_String)
+		public static string GetMemberDisplayName(MemberInfo i_MemberInfo)
 		{
-			StringBuilder result = new StringBuilder();
+			return StringUtils.SpreadStringByCapitalLetters(i_MemberInfo.Name);
+		}
 
-			foreach (char currentChar in i_String)
+		private static string getPropertyValueAsString(object i_Object, PropertyInfo i_Property)
+		{
+			string existingValue;
+			try
 			{
-				if (char.IsUpper(currentChar) && (result.Length > 0))
-				{
-					result.Append(' ');
-				}
+				object currentValue = i_Property.GetValue(i_Object, null);
+				currentValue = currentValue == null ? "null" : currentValue.ToString();
 
-				result.Append(currentChar);
+				existingValue = string.Format("(Current value: {0}) ", currentValue);
+			}
+			catch (Exception)
+			{
+				existingValue = "(Current value: Unable to read value...) ";
 			}
 
-			return result.ToString();
+			return existingValue;
 		}
 
 		private static bool isInteger(string i_UserInput)

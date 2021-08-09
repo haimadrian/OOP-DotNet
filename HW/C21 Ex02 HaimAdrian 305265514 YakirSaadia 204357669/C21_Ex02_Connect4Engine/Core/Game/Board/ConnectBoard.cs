@@ -33,8 +33,8 @@ namespace C21_Ex02_Connect4Engine.Core.Game.Board
 
 			if (isPlaceAvailable)
 			{
-				const bool v_ValidateGameTool = false;
-				o_GameToolLocation = addGameTool(i_Column, i_GameTool, v_ValidateGameTool);
+				const bool v_ValidateGameTool = true;
+				o_GameToolLocation = addGameTool(i_Column, i_GameTool, !v_ValidateGameTool);
 			}
 
 			return isPlaceAvailable;

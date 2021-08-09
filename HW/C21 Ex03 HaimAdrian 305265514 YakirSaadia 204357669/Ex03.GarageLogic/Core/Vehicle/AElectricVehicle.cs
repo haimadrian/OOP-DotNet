@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic.Core.Vehicle
 				return Engine.EnergyMax;
 			}
 
-			set
+			protected set
 			{
 				Engine.EnergyMax = value;
 			}

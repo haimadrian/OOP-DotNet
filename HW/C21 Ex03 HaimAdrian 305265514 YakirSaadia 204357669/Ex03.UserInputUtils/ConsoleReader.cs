@@ -3,8 +3,6 @@ using System.Text;
 
 namespace Ex03.UserInputUtils
 {
-	public delegate bool UserInputValidationDelegate(string i_InputString);
-
 	public class ConsoleReader
 	{
 		public static string ReadUserInputWithValidation(string i_UserInputRequestMessage, UserInputValidationDelegate i_IsInputValidFunc)
@@ -30,15 +28,8 @@ namespace Ex03.UserInputUtils
 
 			StringBuilder inputMessage = new StringBuilder();
 
-			if (!string.IsNullOrEmpty(i_UserInputRequestMessage))
-			{
-				inputMessage.AppendLine(i_UserInputRequestMessage);
-			}
-			else
-			{
-				inputMessage.AppendLine("Please select one of the choices below:");
-			}
-			
+			inputMessage.AppendLine(!string.IsNullOrEmpty(i_UserInputRequestMessage) ? i_UserInputRequestMessage : "Please select one of the choices below:");
+
 			foreach (int currentItem in Enum.GetValues(i_EnumType))
 			{
 				inputMessage.Append(currentItem).Append(". ").AppendLine(Enum.ToObject(i_EnumType, currentItem).ToString());
@@ -51,7 +42,13 @@ namespace Ex03.UserInputUtils
 				Console.Write("Illegal input. Try again: ");
 			}
 
-			return Enum.ToObject(i_EnumType, int.Parse(userInput));
+			int userInputAsInt = 0;
+			if (userInput != null)
+			{
+				userInputAsInt = int.Parse(userInput);
+			}
+
+			return Enum.ToObject(i_EnumType, userInputAsInt);
 		}
 
 		private static bool isEnumInputValid(Type i_EnumType, string i_UserInput)

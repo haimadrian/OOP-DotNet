@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ex03.GarageLogic.Api.Utils;
 using Ex03.GarageLogic.Api.Vehicle;
 using Ex03.GarageLogic.Api.Vehicle.Car;
 using Ex03.GarageLogic.Api.Vehicle.Motorcycle;
@@ -23,7 +24,12 @@ namespace Ex03.GarageLogic.Core.Vehicle.Visitors
 
 		private static string visitIFuelVehicle(IFuelVehicle i_Vehicle)
 		{
-			return string.Format("Fuel Amount (Liters, Left / Max): {0} / {1}", i_Vehicle.FuelLeftLiters, i_Vehicle.FuelMaxLiters);
+			return string.Format(
+@"Fuel Type: {0}
+Fuel Amount (Liters, Left / Max): {1} / {2}",
+				StringUtils.SpreadStringByCapitalLettersOrNumber(i_Vehicle.FuelType.ToString()),
+				i_Vehicle.FuelLeftLiters,
+				i_Vehicle.FuelMaxLiters);
 		}
 
 		private static string visitICarVehicle(ICar i_Vehicle)
@@ -124,7 +130,7 @@ License Number: {2}
 Energy Left (Percentage): {3}%
 Tires: ({4})
 	{5}",
-				i_Vehicle.GetType().Name,
+				StringUtils.SpreadStringByCapitalLetters(i_Vehicle.GetType().Name),
 				i_Vehicle.Brand,
 				i_Vehicle.LicenseNumber,
 				i_Vehicle.EnergyLeftPercentage * k_MaxPercentageInToString,

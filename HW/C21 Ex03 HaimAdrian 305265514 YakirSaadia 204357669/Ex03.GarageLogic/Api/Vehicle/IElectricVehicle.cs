@@ -2,7 +2,7 @@
 {
 	public interface IElectricVehicle : IVehicle
 	{
-		float BatteryTimeMaxHours { get; set; }
+		float BatteryTimeMaxHours { get; }
 
 		float BatteryTimeLeftHours { get; }
 

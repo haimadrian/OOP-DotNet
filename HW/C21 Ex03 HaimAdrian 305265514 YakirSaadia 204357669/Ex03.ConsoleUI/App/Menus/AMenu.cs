@@ -53,6 +53,11 @@ namespace Ex03.ConsoleUI.App.Menus
 
 		protected abstract void InitMenuItems();
 
+		protected void AddExitMenuItem(string i_Text)
+		{
+			r_ConsoleMenuManager.ExitMenu = i_Text;
+		}
+
 		protected TMenuItem Show(bool i_ClearConsole)
 		{
 			return r_ConsoleMenuManager.Show(i_ClearConsole);

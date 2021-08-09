@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Ex03.GarageLogic.Api.Controllers;
+﻿using Ex03.GarageLogic.Api.Controllers;
 using Ex03.GarageLogic.Api.Vehicle;
 using Ex03.GarageLogic.Api.Vehicle.Car;
 using Ex03.GarageLogic.Api.Vehicle.Motorcycle;
@@ -17,7 +14,7 @@ namespace Ex03.UnitTests
 				VehicleController.Instance.NewVehicle<IElectricMotorcycle>(VehicleType.ElectricMotorcycle, "BB", i_LicenseNumber);
 			electricMotorcycle.LicenseType = eLicenseType.A;
 			electricMotorcycle.EngineCapacityCubicCentimeter = 500;
-			electricMotorcycle.SetTiresManufacturerName("TB");
+			electricMotorcycle.TiresManufacturerName = "TB";
 			return electricMotorcycle;
 		}
 
@@ -27,7 +24,7 @@ namespace Ex03.UnitTests
 				VehicleController.Instance.NewVehicle<IElectricMotorcycle>(VehicleType.ElectricMotorcycle, i_Brand, i_LicenseNumber);
 			electricMotorcycle.LicenseType = eLicenseType.A;
 			electricMotorcycle.EngineCapacityCubicCentimeter = 500;
-			electricMotorcycle.SetTiresManufacturerName("TB");
+			electricMotorcycle.TiresManufacturerName = "TB";
 			return electricMotorcycle;
 		}
 
@@ -36,7 +33,7 @@ namespace Ex03.UnitTests
 			IElectricCar electricCar = VehicleController.Instance.NewVehicle<IElectricCar>(VehicleType.ElectricCar, "BB", i_LicenseNumber);
 			electricCar.Color = eColor.Yellow;
 			electricCar.DoorsAmount = eDoorsAmount.Two;
-			electricCar.SetTiresManufacturerName("TB");
+			electricCar.TiresManufacturerName = "TB";
 			return electricCar;
 		}
 
@@ -45,7 +42,7 @@ namespace Ex03.UnitTests
 			IFuelTruck fuelTruck = VehicleController.Instance.NewVehicle<IFuelTruck>(VehicleType.FuelTruck, "BB", i_LicenseNumber);
 			fuelTruck.HavingDangerousSubstances = true;
 			fuelTruck.CargoVolume = 600;
-			fuelTruck.SetTiresManufacturerName("TB");
+			fuelTruck.TiresManufacturerName = "TB";
 			return fuelTruck;
 		}
 	}

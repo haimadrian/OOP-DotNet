@@ -2,7 +2,7 @@
 {
 	internal enum eMenuItem
 	{
-		AddVehicle,
+		AddOrEditVehicle,
 		ListVehicleLicenseNumbers,
 		UpdateVehicleGarageState,
 		FullyInflateVehicleTires,
@@ -10,7 +10,8 @@
 		RechargeVehicle,
 		PrintVehicleReport,
 		PrintAllVehicleReport,
-		AddNewVehicle,
-		Exit
+		AddVehicle,
+		EditVehicle,
+		EditVehicleAdvanced
 	}
 }

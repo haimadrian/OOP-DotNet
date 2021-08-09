@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 
 namespace Ex03.GarageLogic.Api.Vehicle
 {
@@ -28,8 +27,7 @@ namespace Ex03.GarageLogic.Api.Vehicle
 		/// <summary>
 		/// Apply tires manufacturer name to all tires at once.
 		/// </summary>
-		/// <param name="i_ManufacturerName">Manufacturer name to use</param>
-		void SetTiresManufacturerName(string i_ManufacturerName);
+		string TiresManufacturerName { set; }
 
 		/// <summary>
 		/// Each implementor should send itself to the Visit method of the specified visitor.<br/>

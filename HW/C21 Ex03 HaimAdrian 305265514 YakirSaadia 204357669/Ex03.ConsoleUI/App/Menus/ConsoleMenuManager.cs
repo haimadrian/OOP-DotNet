@@ -7,10 +7,12 @@ namespace Ex03.ConsoleUI.App.Menus
 {
 	internal class ConsoleMenuManager<TMenuItem>
 	{
-		private const int k_MinChoice = 1;
-
 		private readonly string r_Title;
 		private readonly MenuItemGroup<TMenuItem> r_MenuItemGroup;
+
+		private string m_ExitMenu;
+
+		private int m_ExitMenuIndex;
 
 		public ConsoleMenuManager(string i_Title, MenuItemGroup<TMenuItem> i_MenuItemGroup)
 		{
@@ -26,6 +28,19 @@ namespace Ex03.ConsoleUI.App.Menus
 			}
 		}
 
+		public string ExitMenu
+		{
+			get
+			{
+				return m_ExitMenu;
+			}
+
+			set
+			{
+				m_ExitMenu = value;
+			}
+		}
+
 		public TMenuItem Show(bool i_ShouldClearConsole)
 		{
 			if (i_ShouldClearConsole)
@@ -37,6 +52,11 @@ namespace Ex03.ConsoleUI.App.Menus
 
 			string userInput = ConsoleReader.ReadUserInputWithValidation(string.Empty, isUserChoiceValid);
 			int userChoice = int.Parse(userInput);
+
+			if (userChoice == m_ExitMenuIndex)
+			{
+				throw new ExitMenuException();
+			}
 
 			MenuItem<TMenuItem> selectedMenuItem = MenuItemGroup[userChoice - 1];
 			OnMenuItemChosen(selectedMenuItem);
@@ -54,6 +74,7 @@ namespace Ex03.ConsoleUI.App.Menus
 
 		private void printMenu()
 		{
+			m_ExitMenuIndex = -1;
 			StringBuilder menu = new StringBuilder();
 
 			if (!string.IsNullOrEmpty(r_Title))
@@ -69,16 +90,24 @@ namespace Ex03.ConsoleUI.App.Menus
 				menu.Append(MenuItemGroup.IndexOf(currentMenuItem) + 1).Append(". ").AppendLine(menuItemText);
 			}
 
+			if (!string.IsNullOrEmpty(ExitMenu))
+			{
+				m_ExitMenuIndex = MenuItemGroup.Count + 1;
+				menu.Append(m_ExitMenuIndex).Append(". ").AppendLine(ExitMenu);
+			}
+
 			Console.WriteLine(menu.ToString());
 		}
 
 		private bool isUserChoiceValid(string i_InputString)
 		{
+			const int k_MinChoice = 1;
+
 			int choice;
 			return !string.IsNullOrEmpty(i_InputString) &&
 				   int.TryParse(i_InputString, out choice) &&
 				   (choice >= k_MinChoice) &&
-				   (choice <= MenuItemGroup.Count);
+				   (choice <= (string.IsNullOrEmpty(ExitMenu) ? MenuItemGroup.Count : m_ExitMenuIndex));
 		}
 	}
 }

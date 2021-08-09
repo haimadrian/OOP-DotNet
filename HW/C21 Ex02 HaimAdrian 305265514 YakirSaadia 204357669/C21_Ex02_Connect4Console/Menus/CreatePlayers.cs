@@ -94,7 +94,7 @@ namespace C21_Ex02_Connect4Console.Menus
 			bool exit;
 			Screen.Clear();
 
-			const string v_UserInputRequestMessage = 
+			const string k_UserInputRequestMessage = 
 @"Who plays Connect 4 Game?
 =========================
 
@@ -104,7 +104,7 @@ Please select game mode:
 Q. Quit
 ";
 
-			string userInput = ConsoleReader.ReadUserInputWithValidation(v_UserInputRequestMessage, validateGameModeUserSelection);
+			string userInput = ConsoleReader.ReadUserInputWithValidation(k_UserInputRequestMessage, validateGameModeUserSelection);
 			if (userInput.Equals(eKeys.Q.ToString(), StringComparison.InvariantCultureIgnoreCase))
 			{
 				exit = true;

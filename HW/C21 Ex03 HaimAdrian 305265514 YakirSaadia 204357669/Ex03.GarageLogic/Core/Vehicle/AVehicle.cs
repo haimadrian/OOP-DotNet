@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using Ex03.GarageLogic.Api.Vehicle;
 using Ex03.GarageLogic.Api.Utils;
 using Ex03.GarageLogic.Core.Vehicle.Energy;
@@ -20,7 +21,7 @@ namespace Ex03.GarageLogic.Core.Vehicle
 		{
 			FormatValidations.ValidateAlphaNumericFormat(i_Brand, "Brand");
 			FormatValidations.ValidateAlphaNumericFormat(i_LicenseNumber, "License Number");
-			
+
 			r_Brand = i_Brand.Trim();
 			r_LicenseNumber = i_LicenseNumber.Trim();
 			r_Engine = i_Engine;
@@ -73,19 +74,39 @@ namespace Ex03.GarageLogic.Core.Vehicle
 			}
 		}
 
+		public string TiresManufacturerName
+		{
+			get
+			{
+				StringBuilder manufacturer = new StringBuilder("[");
+
+				foreach (Tire currentTire in Tires)
+				{
+					if (manufacturer.Length > 1)
+					{
+						manufacturer.Append(", ");
+					}
+
+					manufacturer.Append(currentTire.ManufacturerName);
+				}
+
+				return manufacturer.Append("]").ToString();
+			}
+
+			set
+			{
+				foreach (Tire currentTire in Tires)
+				{
+					currentTire.ManufacturerName = value;
+				}
+			}
+		}
+
 		protected TEngineType Engine
 		{
 			get
 			{
 				return r_Engine;
-			}
-		}
-
-		public void SetTiresManufacturerName(string i_ManufacturerName)
-		{
-			foreach (Tire currentTire in Tires)
-			{
-				currentTire.ManufacturerName = i_ManufacturerName;
 			}
 		}
 

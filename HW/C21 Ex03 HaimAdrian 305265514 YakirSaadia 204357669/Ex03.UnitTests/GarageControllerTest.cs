@@ -18,15 +18,15 @@ namespace Ex03.UnitTests
 		{
 			// Arrange
 			ICustomer owner = GarageController.Instance.GetOrCreateCustomer("Haim", "050-1234321");
-			string licenseNumber = "111-111-111";
-			IElectricMotorcycle electricMotorcycle = TestUtils.CreateElectricMotorcycle(licenseNumber);
+			const string k_LicenseNumber = "111-111-111";
+			IElectricMotorcycle electricMotorcycle = TestUtils.CreateElectricMotorcycle(k_LicenseNumber);
 			GarageController.Instance.AddVehicle(owner, electricMotorcycle);
 
-			string expectedReport = @"Vehicle Status: Repairing
+			const string k_ExpectedReport = @"Vehicle Status: Repairing
 Owner Details
 	Name: Haim
 	Phone: 050-1234321
-ElectricMotorcycle
+Electric Motorcycle
 	Brand: BB
 	License Number: 111-111-111
 	Energy Left (Percentage): 50%
@@ -38,10 +38,10 @@ ElectricMotorcycle
 	Engine Capacity (Cubic Centimeter): 500";
 
 			// Act
-			string vehicleReport = GarageController.Instance.GetVehicleReport(licenseNumber);
+			string vehicleReport = GarageController.Instance.GetVehicleReport(k_LicenseNumber);
 
 			// Assert
-			Assert.AreEqual(expectedReport, vehicleReport, "Wrong report format");
+			Assert.AreEqual(k_ExpectedReport, vehicleReport, "Wrong report format");
 		}
 
 		[Test]
@@ -49,15 +49,15 @@ ElectricMotorcycle
 		{
 			// Arrange
 			ICustomer owner = GarageController.Instance.GetOrCreateCustomer("Haim", "050-1234321");
-			string licenseNumber = "111-111-112";
-			IElectricCar electricCar = TestUtils.CreateElectricCar(licenseNumber);
+			const string k_LicenseNumber = "111-111-112";
+			IElectricCar electricCar = TestUtils.CreateElectricCar(k_LicenseNumber);
 			GarageController.Instance.AddVehicle(owner, electricCar);
 
-			string expectedReport = @"Vehicle Status: Repairing
+			const string k_ExpectedReport = @"Vehicle Status: Repairing
 Owner Details
 	Name: Haim
 	Phone: 050-1234321
-ElectricCar
+Electric Car
 	Brand: BB
 	License Number: 111-111-112
 	Energy Left (Percentage): 50%
@@ -71,10 +71,10 @@ ElectricCar
 	Number of Doors: Two";
 
 			// Act
-			string vehicleReport = GarageController.Instance.GetVehicleReport(licenseNumber);
+			string vehicleReport = GarageController.Instance.GetVehicleReport(k_LicenseNumber);
 
 			// Assert
-			Assert.AreEqual(expectedReport, vehicleReport, "Wrong report format");
+			Assert.AreEqual(k_ExpectedReport, vehicleReport, "Wrong report format");
 		}
 
 		[Test]
@@ -82,15 +82,15 @@ ElectricCar
 		{
 			// Arrange
 			ICustomer owner = GarageController.Instance.GetOrCreateCustomer("Haim", "050-1234321");
-			string licenseNumber = "111-111-113";
-			IFuelTruck fuelTruck = TestUtils.CreateFuelTruck(licenseNumber);
+			const string k_LicenseNumber = "111-111-113";
+			IFuelTruck fuelTruck = TestUtils.CreateFuelTruck(k_LicenseNumber);
 			GarageController.Instance.AddVehicle(owner, fuelTruck);
 
-			string expectedReport = @"Vehicle Status: Repairing
+			const string k_ExpectedReport = @"Vehicle Status: Repairing
 Owner Details
 	Name: Haim
 	Phone: 050-1234321
-FuelTruck
+Fuel Truck
 	Brand: BB
 	License Number: 111-111-113
 	Energy Left (Percentage): 50%
@@ -111,15 +111,16 @@ FuelTruck
 		Manufacturer: TB, Air Pressure (Actual / Max): 26 / 26
 		Manufacturer: TB, Air Pressure (Actual / Max): 26 / 26
 		Manufacturer: TB, Air Pressure (Actual / Max): 26 / 26
+	Fuel Type: Soler
 	Fuel Amount (Liters, Left / Max): 55 / 110
 	Cargo Volume: 600
 	Having Dangerous Substances?: Yes";
 
 			// Act
-			string vehicleReport = GarageController.Instance.GetVehicleReport(licenseNumber);
+			string vehicleReport = GarageController.Instance.GetVehicleReport(k_LicenseNumber);
 
 			// Assert
-			Assert.AreEqual(expectedReport, vehicleReport, "Wrong report format");
+			Assert.AreEqual(k_ExpectedReport, vehicleReport, "Wrong report format");
 		}
 
 		[Test]
@@ -127,12 +128,12 @@ FuelTruck
 		{
 			// Arrange
 			ICustomer owner = GarageController.Instance.GetOrCreateCustomer("Haim", "050-1234321");
-			string licenseNumber = "111-111-114";
-			IElectricMotorcycle electricMotorcycle = TestUtils.CreateElectricMotorcycle(licenseNumber);
+			const string k_LicenseNumber = "111-111-114";
+			IElectricMotorcycle electricMotorcycle = TestUtils.CreateElectricMotorcycle(k_LicenseNumber);
 			GarageController.Instance.AddVehicle(owner, electricMotorcycle);
 
-			GarageController.Instance.UpdateVehicleState(licenseNumber, eVehicleState.Paid);
-			string vehicleReportBefore = GarageController.Instance.GetVehicleReport(licenseNumber);
+			GarageController.Instance.UpdateVehicleState(k_LicenseNumber, eVehicleState.Paid);
+			string vehicleReportBefore = GarageController.Instance.GetVehicleReport(k_LicenseNumber);
 
 			// Act
 			Exception e = null;
@@ -145,7 +146,7 @@ FuelTruck
 				e = exception;
 			}
 
-			string vehicleReportAfter = GarageController.Instance.GetVehicleReport(licenseNumber);
+			string vehicleReportAfter = GarageController.Instance.GetVehicleReport(k_LicenseNumber);
 
 			// Assert
 			Assert.True(vehicleReportBefore.Contains("Vehicle Status: Paid"), "UpdateVehicleState did not work");
@@ -158,8 +159,8 @@ FuelTruck
 		{
 			// Arrange
 			ICustomer owner = GarageController.Instance.GetOrCreateCustomer("Haim", "050-1234321");
-			string licenseNumber = "111-111-115";
-			IElectricMotorcycle electricMotorcycle = TestUtils.CreateElectricMotorcycle(licenseNumber);
+			const string k_LicenseNumber = "111-111-115";
+			IElectricMotorcycle electricMotorcycle = TestUtils.CreateElectricMotorcycle(k_LicenseNumber);
 			GarageController.Instance.AddVehicle(owner, electricMotorcycle);
 
 			float batteryBefore = electricMotorcycle.BatteryTimeLeftHours;
@@ -176,16 +177,16 @@ FuelTruck
 			try
 			{
 				float batteryTimeToFillMinutes = (electricMotorcycle.BatteryTimeMaxHours + 1) * 60;
-				GarageController.Instance.RechargeVehicle(licenseNumber, batteryTimeToFillMinutes);
+				GarageController.Instance.RechargeVehicle(k_LicenseNumber, batteryTimeToFillMinutes);
 			}
 			catch (ValueOutOfRangeException exception)
 			{
 				e = exception;
 			}
 
-			const float v_BatteryTimeToFillMinutes = 0.2F * 60;
-			GarageController.Instance.RechargeVehicle(licenseNumber, v_BatteryTimeToFillMinutes);
-			GarageController.Instance.FullyInflateTiresOfVehicle(licenseNumber);
+			const float k_BatteryTimeToFillMinutes = 0.2F * 60;
+			GarageController.Instance.RechargeVehicle(k_LicenseNumber, k_BatteryTimeToFillMinutes);
+			GarageController.Instance.FullyInflateTiresOfVehicle(k_LicenseNumber);
 
 			// Assert
 			Assert.NotNull(e, "We are supposed to receive ValueOutOfRangeException when charging more than maximum");

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using Ex03.ConsoleUI.App.Menus.Model;
-using Ex03.ConsoleUI.App.Reflection;
 using Ex03.ConsoleUI.App.Utils;
 using Ex03.GarageLogic.Api.Controllers;
 using Ex03.GarageLogic.Api.Exceptions;
@@ -13,30 +12,7 @@ namespace Ex03.ConsoleUI.App.Menus
 {
 	internal class AddVehicleMenu : AMenu<VehicleType>
 	{
-		private const string k_Title = "Add Vehicle";
-
-		protected override string MenuTitle
-		{
-			get
-			{
-				return k_Title;
-			}
-		}
-
-		protected override void InitMenuItems()
-		{
-			PropertyInfo[] vehicleTypes = typeof(VehicleType).GetProperties(BindingFlags.Public | BindingFlags.Static);
-
-			foreach (PropertyInfo currentProperty in vehicleTypes)
-			{
-				if (currentProperty.CanRead && (currentProperty.PropertyType == typeof(VehicleType)))
-				{
-					MenuItemGroup.Add((VehicleType)currentProperty.GetValue(null, null), currentProperty.Name, onMenuItemChosen);
-				}
-			}
-		}
-
-		private void onMenuItemChosen(MenuItem<VehicleType> i_Menuitem)
+		private static void onMenuItemChosen(MenuItem<VehicleType> i_MenuItem)
 		{
 			bool tryAgain;
 			do
@@ -48,10 +24,16 @@ namespace Ex03.ConsoleUI.App.Menus
 					string brandName = ConsoleReader.ReadUserInputWithValidation("Please enter brand name: ", FormatValidations.IsAlphaNumeric);
 					string licenseNumber = ConsoleReader.ReadUserInputWithValidation("Please enter license number: ", FormatValidations.IsAlphaNumeric);
 
-					IVehicle vehicle = VehicleController.Instance.NewVehicle<IVehicle>(i_Menuitem.Item, brandName, licenseNumber);
+					IVehicle vehicle = VehicleController.Instance.NewVehicle<IVehicle>(i_MenuItem.Item, brandName, licenseNumber);
+
+					// Add the vehicle before reading properties for that vehicle, cause if vehicle already exists, it
+					// is super annoying to fail at the very end of the process.. Hence, we would like to fail before.
+					GarageController.Instance.AddVehicle(GarageController.Instance.GetOrCreateCustomer(ownerName, ownerPhone), vehicle);
+
+					// We get here only when vehicle is new, for sure, so continue reading properties for that vehicle.
 					ReflectionUtils.FillInPublicInstancePropertiesFromConsole(vehicle);
 
-					GarageController.Instance.AddVehicle(GarageController.Instance.GetOrCreateCustomer(ownerName, ownerPhone), vehicle);
+					Console.WriteLine("Vehicle with license number {0} has been added successfully.", licenseNumber);
 					tryAgain = false;
 				}
 				catch (FormatException e)
@@ -64,6 +46,32 @@ namespace Ex03.ConsoleUI.App.Menus
 				}
 			}
 			while (tryAgain);
+		}
+
+		protected override string MenuTitle
+		{
+			get
+			{
+				return "Add Vehicle";
+			}
+		}
+
+		protected override void InitMenuItems()
+		{
+			PropertyInfo[] vehicleTypes = typeof(VehicleType).GetProperties(BindingFlags.Public | BindingFlags.Static);
+
+			foreach (PropertyInfo currentProperty in vehicleTypes)
+			{
+				if (currentProperty.CanRead && (currentProperty.PropertyType == typeof(VehicleType)))
+				{
+					MenuItemGroup.Add(
+						(VehicleType)currentProperty.GetValue(null, null),
+						ReflectionUtils.GetMemberDisplayName(currentProperty),
+						onMenuItemChosen);
+				}
+			}
+
+			AddExitMenuItem("Go Back to Main Menu");
 		}
 	}
 }

@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Api\Controllers\GarageController.cs" />
     <Compile Include="Api\Garage\ICustomer.cs" />
+    <Compile Include="Api\Utils\StringUtils.cs" />
     <Compile Include="Api\Vehicle\IVehicleVisitor.cs" />
     <Compile Include="Core\Garage\Customer.cs" />
     <Compile Include="Api\Utils\FormatValidations.cs" />

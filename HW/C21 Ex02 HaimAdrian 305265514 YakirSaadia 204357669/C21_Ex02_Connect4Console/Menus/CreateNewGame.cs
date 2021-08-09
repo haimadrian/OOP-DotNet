@@ -26,7 +26,7 @@ namespace C21_Ex02_Connect4Console.Menus
 
 			Screen.Clear();
 
-			const string v_WelcomeMessage = 
+			const string k_WelcomeMessage = 
 @"Create new Connect 4 Game
 =========================
 
@@ -38,7 +38,7 @@ Undo/Redo: Enter Z to undo last move and R to redo last undone move.";
 @"{0}
 
 Please enter amount of rows, between {1} to {2}: ",
-				v_WelcomeMessage,
+				k_WelcomeMessage,
 				k_MinimumLength,
 				k_MaximumLength);
 

@@ -12,6 +12,10 @@ namespace Ex03.GarageLogic.Api.Garage
 
 		bool ContainsVehicle(string i_LicenseNumber);
 
+		IVehicle GetVehicle(string i_LicenseNumber);
+
+		TVehicleType GetVehicle<TVehicleType>(string i_LicenseNumber) where TVehicleType : IVehicle;
+
 		ICollection<string> CollectLicenseNumbers(Predicate<eVehicleState> i_Filter);
 
 		void UpdateVehicleState(string i_LicenseNumber, eVehicleState i_NewState);

@@ -5,14 +5,12 @@ namespace Ex03.ConsoleUI.App.Utils
 {
 	public class CollectionUtils
 	{
-		private const string k_CollectionPrefix = "[";
-
-		private const string k_CollectionSuffix = "]";
-
-		private const string k_CollectionSeparator = ", ";
-
 		public static string ToString<T>(ICollection<T> i_Collection)
 		{
+			const string k_CollectionPrefix = "[";
+			const string k_CollectionSuffix = "]";
+			const string k_CollectionSeparator = ", ";
+
 			StringBuilder collectionAsString = new StringBuilder(k_CollectionPrefix);
 
 			foreach (T item in i_Collection)

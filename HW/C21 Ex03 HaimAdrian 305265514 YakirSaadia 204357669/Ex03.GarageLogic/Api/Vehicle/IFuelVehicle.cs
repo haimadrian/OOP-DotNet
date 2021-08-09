@@ -2,11 +2,11 @@
 {
 	public interface IFuelVehicle : IVehicle
 	{
-		eFuelType FuelType { get; set; }
+		eFuelType FuelType { get; }
 
 		float FuelLeftLiters { get; }
 		
-		float FuelMaxLiters { get; set; }
+		float FuelMaxLiters { get; }
 
 		void Refuel(float i_FuelLitersToFill);
 

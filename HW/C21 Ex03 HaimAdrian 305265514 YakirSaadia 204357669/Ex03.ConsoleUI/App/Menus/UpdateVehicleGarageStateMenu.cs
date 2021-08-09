@@ -8,9 +8,28 @@ namespace Ex03.ConsoleUI.App.Menus
 {
 	internal class UpdateVehicleGarageStateMenu : AMenu<eVehicleState>
 	{
-		private const string k_Title = "Update Vehicle Garage State";
+		private static void onMenuItemChosen(MenuItem<eVehicleState> i_Menuitem)
+		{
+			eVehicleState userChoice = i_Menuitem.Item;
 
-		private string m_LicenseNumber;
+			bool tryAgain;
+			do
+			{
+				try
+				{
+					string licenseNumber = ReadLicenseNumberForActions();
+					GarageController.Instance.UpdateVehicleState(licenseNumber, userChoice);
+
+					Console.WriteLine("State of vehicle with license number {0} has been updated successfully.", licenseNumber);
+					tryAgain = false;
+				}
+				catch (NoSuchVehicleException e)
+				{
+					tryAgain = HandleErrorAndAskForRetry("Wrong input. Reason: ", e);
+				}
+			}
+			while (tryAgain);
+		}
 
 		protected override string MenuTitle
 		{
@@ -22,14 +41,10 @@ namespace Ex03.ConsoleUI.App.Menus
 
 		public override eVehicleState Show()
 		{
-			Console.WriteLine("{0}{1}", k_Title, Environment.NewLine);
+			Console.WriteLine("{0}{1}", "Update Vehicle Garage State", Environment.NewLine);
 
-			m_LicenseNumber = ReadLicenseNumberForActions();
-
-			Console.WriteLine();
-
-			const bool v_ClearConsole = false;
-			return Show(v_ClearConsole);
+			const bool v_ClearConsole = true;
+			return Show(!v_ClearConsole);
 		}
 
 		protected override void InitMenuItems()
@@ -39,26 +54,8 @@ namespace Ex03.ConsoleUI.App.Menus
 			{
 				MenuItemGroup.Add(currentItem, currentItem.ToString(), onMenuItemChosen);
 			}
-		}
 
-		private void onMenuItemChosen(MenuItem<eVehicleState> i_Menuitem)
-		{
-			eVehicleState userChoice = i_Menuitem.Item;
-
-			bool tryAgain;
-			do
-			{
-				try
-				{
-					GarageController.Instance.UpdateVehicleState(m_LicenseNumber, userChoice);
-					tryAgain = false;
-				}
-				catch (NoSuchVehicleException e)
-				{
-					tryAgain = HandleErrorAndAskForRetry("Wrong input. Reason: ", e);
-				}
-			}
-			while (tryAgain);
+			AddExitMenuItem("Go Back");
 		}
 	}
 }

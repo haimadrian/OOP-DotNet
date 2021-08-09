@@ -9,8 +9,6 @@ namespace Ex03.GarageLogic.Core.Garage
 {
 	internal class GarageImpl : IGarage
 	{
-		private const float k_MinutesInHour = 60;
-
 		private readonly IDictionary<string, GarageVehicle> r_VehicleLicenseNumberToVehicle;
 
 		public GarageImpl()
@@ -60,6 +58,18 @@ namespace Ex03.GarageLogic.Core.Garage
 		public bool ContainsVehicle(string i_LicenseNumber)
 		{
 			return r_VehicleLicenseNumberToVehicle.ContainsKey(i_LicenseNumber);
+		}
+
+		public IVehicle GetVehicle(string i_LicenseNumber)
+		{
+			return GetVehicle<IVehicle>(i_LicenseNumber);
+		}
+
+		public TVehicleType GetVehicle<TVehicleType>(string i_LicenseNumber)
+			where TVehicleType : IVehicle
+		{
+			// Exception might be thrown by this[i_LicenseNumber] if vehicle does not exist
+			return (TVehicleType)(this[i_LicenseNumber] as GarageVehicle).Vehicle;
 		}
 
 		public ICollection<string> CollectLicenseNumbers(Predicate<eVehicleState> i_Filter)
@@ -121,8 +131,8 @@ namespace Ex03.GarageLogic.Core.Garage
 
 			if (vehicle.FuelType != i_FuelType)
 			{
-				string expectedType = i_FuelType.ToString();
-				string actualType = vehicle.FuelType.ToString();
+				string expectedType = vehicle.FuelType.ToString();
+				string actualType = i_FuelType.ToString();
 				throw new WrongFuelTypeException(
 					string.Format("Wrong fuel type. Expected: {0}, Actual: {1}", expectedType, actualType),
 					i_LicenseNumber,
@@ -135,6 +145,7 @@ namespace Ex03.GarageLogic.Core.Garage
 
 		public void RechargeVehicle(string i_LicenseNumber, float i_BatteryTimeToFillMinutes)
 		{
+			const float k_MinutesInHour = 60;
 			IElectricVehicle vehicle = getValidatedVehicleType<IElectricVehicle>(i_LicenseNumber);
 			vehicle.Charge(i_BatteryTimeToFillMinutes / k_MinutesInHour);
 		}

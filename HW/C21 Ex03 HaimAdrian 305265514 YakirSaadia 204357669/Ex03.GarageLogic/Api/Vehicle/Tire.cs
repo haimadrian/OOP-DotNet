@@ -7,10 +7,6 @@ namespace Ex03.GarageLogic.Api.Vehicle
 	// Otherwise we would have to expose an ITire interface which would then box the struct type.. so just use a class.
 	public class Tire
 	{
-		private const float k_MinAirPressure = 0;
-
-		private const string k_AirPressureOutOfRangeMessage = "Air pressure is out of range. Range: [{0}, {1}], Was: {2}";
-
 		private readonly float r_MaxAirPressure;
 
 		private string m_ManufacturerName;
@@ -54,22 +50,24 @@ namespace Ex03.GarageLogic.Api.Vehicle
 
 			private set
 			{
+				const float k_MinAirPressure = 0;
+				const string k_AirPressureOutOfRangeMessage = "Air pressure is out of range. Range: [{0}, {1}], Was: {2}";
+
+				if ((value > MaxAirPressure) || (value < k_MinAirPressure))
+				{
+					throw new ValueOutOfRangeException(
+						string.Format(k_AirPressureOutOfRangeMessage, k_MinAirPressure, MaxAirPressure, value),
+						k_MinAirPressure,
+						MaxAirPressure);
+				}
+
 				m_AirPressure = value;
 			}
 		}
 
 		public void Inflate(float i_AirPressureToFill)
 		{
-			float newAirPressure = AirPressure + i_AirPressureToFill;
-			if ((newAirPressure > MaxAirPressure) || (newAirPressure < k_MinAirPressure))
-			{
-				throw new ValueOutOfRangeException(
-					string.Format(k_AirPressureOutOfRangeMessage, k_MinAirPressure, MaxAirPressure, newAirPressure),
-					k_MinAirPressure,
-					MaxAirPressure);
-			}
-
-			AirPressure = newAirPressure;
+			AirPressure += i_AirPressureToFill;
 		}
 
 		public void Deflate(float i_AirPressureToRemove)

@@ -43,6 +43,17 @@ namespace Ex03.GarageLogic.Api.Controllers
 			Garage.AddVehicle(i_Owner, i_Vehicle);
 		}
 
+		public IVehicle GetVehicle(string i_LicenseNumber)
+		{
+			return Garage.GetVehicle(i_LicenseNumber);
+		}
+
+		public TVehicleType GetVehicle<TVehicleType>(string i_LicenseNumber)
+			where TVehicleType : IVehicle
+		{
+			return Garage.GetVehicle<TVehicleType>(i_LicenseNumber);
+		}
+
 		public bool ContainsVehicle(string i_LicenseNumber)
 		{
 			return Garage.ContainsVehicle(i_LicenseNumber);
