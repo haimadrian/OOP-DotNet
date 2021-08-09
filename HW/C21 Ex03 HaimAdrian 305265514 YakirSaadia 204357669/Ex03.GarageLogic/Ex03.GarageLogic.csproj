@@ -122,11 +122,5 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <None Include="ClassDiagrams\Controllers and Garage.cd" />
-    <None Include="ClassDiagrams\Exceptions.cd" />
-    <None Include="ClassDiagrams\Vehicle Implementation.cd" />
-    <None Include="ClassDiagrams\Vehicle Interfaces.cd" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

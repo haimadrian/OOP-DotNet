@@ -33,7 +33,11 @@ namespace Ex03.GarageLogic.Core.Garage
 			set
 			{
 				bool isAlreadyExisting = r_VehicleLicenseNumberToVehicle.ContainsKey(i_VehicleLicenseNumber);
-				r_VehicleLicenseNumberToVehicle[i_VehicleLicenseNumber] = value as GarageVehicle;
+				if (!isAlreadyExisting)
+				{
+					r_VehicleLicenseNumberToVehicle[i_VehicleLicenseNumber] = value as GarageVehicle;
+				}
+
 				r_VehicleLicenseNumberToVehicle[i_VehicleLicenseNumber].VehicleState = eVehicleState.Repairing;
 
 				if (isAlreadyExisting)
