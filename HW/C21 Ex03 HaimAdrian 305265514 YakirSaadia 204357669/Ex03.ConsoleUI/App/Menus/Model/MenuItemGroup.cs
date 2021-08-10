@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Ex03.ConsoleUI.App.Menus.Model
@@ -73,7 +74,7 @@ namespace Ex03.ConsoleUI.App.Menus.Model
 			}
 		}
 
-		public void Add(TKey i_Item, string i_ItemText, MenuItem<TKey>.MenuItemChosenEventHandler i_OnMenuItemChosen)
+		public void Add(TKey i_Item, string i_ItemText, Action<MenuItem<TKey>> i_OnMenuItemChosen)
 		{
 			Add(new MenuItem<TKey>(i_Item, i_ItemText, i_OnMenuItemChosen));
 		}

@@ -92,6 +92,8 @@ Please enter maximum air pressure, or negative or zero to stop editing: ",
 							try
 							{
 								FieldInfo field = currentTire.GetType().GetField(k_MaxAirPressureFieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+
+								// ReSharper disable once PossibleNullReferenceException
 								field.SetValue(currentTire, maxAirPressure);
 
 								userInputMessage = "Please enter air pressure, or out of range to stop editing: ";
@@ -99,6 +101,8 @@ Please enter maximum air pressure, or negative or zero to stop editing: ",
 								float airPressure = float.Parse(userInput);
 
 								PropertyInfo property = currentTire.GetType().GetProperty(k_AirPressurePropertyName);
+
+								// ReSharper disable once PossibleNullReferenceException
 								property.GetSetMethod(true).Invoke(currentTire, new object[] { airPressure });
 							}
 							catch (Exception)

@@ -73,6 +73,7 @@ namespace Ex03.GarageLogic.Core.Garage
 			where TVehicleType : IVehicle
 		{
 			// Exception might be thrown by this[i_LicenseNumber] if vehicle does not exist
+			// ReSharper disable once PossibleNullReferenceException
 			return (TVehicleType)(this[i_LicenseNumber] as GarageVehicle).Vehicle;
 		}
 

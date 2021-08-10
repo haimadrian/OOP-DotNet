@@ -1,4 +1,6 @@
-﻿namespace Ex03.ConsoleUI.App.Menus.Model
+﻿using System;
+
+namespace Ex03.ConsoleUI.App.Menus.Model
 {
 	internal class MenuItem<TMenuItem>
 	{
@@ -6,9 +8,9 @@
 
 		private readonly string r_ItemText;
 
-		private readonly MenuItemChosenEventHandler r_OnMenuItemChosen;
+		private readonly Action<MenuItem<TMenuItem>> r_OnMenuItemChosen;
 
-		public MenuItem(TMenuItem i_Item, string i_ItemText, MenuItemChosenEventHandler i_OnMenuItemChosen)
+		public MenuItem(TMenuItem i_Item, string i_ItemText, Action<MenuItem<TMenuItem>> i_OnMenuItemChosen)
 		{
 			r_Item = i_Item;
 			r_ItemText = i_ItemText;
@@ -41,7 +43,7 @@
 			}
 		}
 
-		public MenuItemChosenEventHandler OnMenuItemChosen
+		public Action<MenuItem<TMenuItem>> OnMenuItemChosen
 		{
 			get
 			{
@@ -75,7 +77,5 @@
 
 			return hash;
 		}
-
-		public delegate void MenuItemChosenEventHandler(MenuItem<TMenuItem> i_MenuItem);
 	}
 }
