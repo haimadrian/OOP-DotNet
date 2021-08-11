@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{359FCA02-9413-4F50-A67F-93A7131A73E3}</ProjectGuid>
+    <ProjectGuid>{51D7DC70-FA97-4767-9B78-1C45A5DA7786}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>C21_Ex04_UserInputUtils</RootNamespace>
-    <AssemblyName>C21_Ex04_UserInputUtils</AssemblyName>
+    <RootNamespace>Ex04.Menus.Interfaces</RootNamespace>
+    <AssemblyName>Ex04.Menus.Interfaces</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <LangVersion>2</LangVersion>
     <FileAlignment>512</FileAlignment>
@@ -33,10 +33,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ConsoleReader.cs" />
+    <ProjectReference Include="..\Ex04.Menus.Common\Ex04.Menus.Common.csproj">
+      <Project>{8147aed4-0c35-4cfd-9336-a3d3d0b72a89}</Project>
+      <Name>Ex04.Menus.Common</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collections\HashSet.cs" />
+    <Compile Include="Observer\IObserver.cs" />
+    <Compile Include="Observer\IObservable.cs" />
+    <Compile Include="MenuGroup.cs" />
+    <Compile Include="MenuItem.cs" />
+    <Compile Include="Observer\Observable.cs" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

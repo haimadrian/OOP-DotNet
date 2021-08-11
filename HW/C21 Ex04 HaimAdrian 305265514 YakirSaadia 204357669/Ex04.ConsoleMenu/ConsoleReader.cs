@@ -1,10 +1,8 @@
 using System;
 
-namespace C21_Ex04_UserInputUtils
+namespace Ex04.ConsoleMenu
 {
-	public delegate bool UserInputValidationDelegate(string i_InputString);
-
-	public class ConsoleReader
+	public static class ConsoleReader
 	{
 		public static string ReadUserInputWithValidation(string i_UserInputRequestMessage, UserInputValidationDelegate i_IsInputValidFunc)
 		{
