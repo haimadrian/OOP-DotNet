@@ -35,9 +35,9 @@ namespace Ex05.Connect4UI.Millennial.Forms
 		{
 			InitializeComponent();
 			m_MenuStripActions.Renderer = new MenuStripRenderer();
-			m_PanelBoardView.MouseClick += panelBoardViewOnMouseClick;
-			m_PanelBoardView.MouseMove += panelBoardViewOnMouseMove;
-			m_PanelBoardView.MouseLeave += panelBoardViewOnMouseLeave;
+			m_PanelBoardView.MouseClick += panelBoardView_MouseClick;
+			m_PanelBoardView.MouseMove += panelBoardView_MouseMove;
+			m_PanelBoardView.MouseLeave += panelBoardView_MouseLeave;
 		}
 
 		private IBoardGameEngine<eGameTool> GameEngine
@@ -164,7 +164,7 @@ namespace Ex05.Connect4UI.Millennial.Forms
 
 		private void suspendUserInput()
 		{
-			m_PanelBoardView.MouseClick -= panelBoardViewOnMouseClick;
+			m_PanelBoardView.MouseClick -= panelBoardView_MouseClick;
 			m_ToolStripMenuItemUndo.Enabled = false;
 			m_ToolStripMenuItemRedo.Enabled = false;
 			m_ToolStripMenuItemRestart.Enabled = false;
@@ -172,11 +172,11 @@ namespace Ex05.Connect4UI.Millennial.Forms
 
 		private void resumeUserInput()
 		{
-			m_PanelBoardView.MouseClick += panelBoardViewOnMouseClick;
+			m_PanelBoardView.MouseClick += panelBoardView_MouseClick;
+			m_ToolStripProgressBarPc.Visible = false;
 			m_ToolStripMenuItemUndo.Enabled = true;
 			m_ToolStripMenuItemRedo.Enabled = true;
 			m_ToolStripMenuItemRestart.Enabled = true;
-			m_ToolStripProgressBarPc.Visible = false;
 		}
 
 		private void updateCursorBasedOnCurrentPlayer()
@@ -277,8 +277,10 @@ namespace Ex05.Connect4UI.Millennial.Forms
 			m_PanelBoardView.Refresh(i_WinningFour);
 		}
 
-		private void panelBoardViewOnMouseClick(object i_Sender, MouseEventArgs i_Args)
+		private void panelBoardView_MouseClick(object i_Sender, MouseEventArgs i_Args)
 		{
+			bool isPlaying = false;
+
 			// Don't let user to play too fast and steal moves
 			suspendUserInput();
 
@@ -298,13 +300,11 @@ namespace Ex05.Connect4UI.Millennial.Forms
 
 						if (!GameEngine.IsGameOver)
 						{
+							isPlaying = true;
+
 							// Run it using another thread so we will be able to see progress bar animation
 							m_ToolStripProgressBarPc.Visible = true;
 							ThreadPool.QueueUserWorkItem(pcTurnThreadProc);
-						}
-						else
-						{
-							resumeUserInput();
 						}
 					}
 					catch (IllegalPlayerMoveException e)
@@ -312,6 +312,11 @@ namespace Ex05.Connect4UI.Millennial.Forms
 						UpdateStatus(e.Message, MessageBoxIcon.Error);
 					}
 				}
+			}
+
+			if (!isPlaying)
+			{
+				resumeUserInput();
 			}
 		}
 
@@ -335,7 +340,7 @@ namespace Ex05.Connect4UI.Millennial.Forms
 			}
 		}
 
-		private void panelBoardViewOnMouseMove(object i_Sender, MouseEventArgs i_Args)
+		private void panelBoardView_MouseMove(object i_Sender, MouseEventArgs i_Args)
 		{
 			// Set the cursor only when it is set to default, and use a new reference because the 
 			// image might be resized, depends on board sizing calculation.
@@ -345,7 +350,7 @@ namespace Ex05.Connect4UI.Millennial.Forms
 			}
 		}
 
-		private void panelBoardViewOnMouseLeave(object i_Sender, EventArgs i_Args)
+		private void panelBoardView_MouseLeave(object i_Sender, EventArgs i_Args)
 		{
 			Cursor = Cursors.Default;
 		}

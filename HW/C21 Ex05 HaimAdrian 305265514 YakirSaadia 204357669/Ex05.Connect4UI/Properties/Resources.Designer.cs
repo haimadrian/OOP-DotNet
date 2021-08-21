@@ -9,9 +9,6 @@
 //------------------------------------------------------------------------------
 
 namespace Ex05.Connect4UI.Properties {
-    using System;
-    
-    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -23,7 +20,6 @@ namespace Ex05.Connect4UI.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
-        
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
@@ -42,6 +38,7 @@ namespace Ex05.Connect4UI.Properties {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ex05.Connect4UI.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
+
                 return resourceMan;
             }
         }
@@ -55,6 +52,7 @@ namespace Ex05.Connect4UI.Properties {
             get {
                 return resourceCulture;
             }
+
             set {
                 resourceCulture = value;
             }
@@ -66,6 +64,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap About {
             get {
                 object obj = ResourceManager.GetObject("About", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -76,6 +75,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap Button {
             get {
                 object obj = ResourceManager.GetObject("Button", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -86,6 +86,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap ButtonDown {
             get {
                 object obj = ResourceManager.GetObject("ButtonDown", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -96,6 +97,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap ButtonHover {
             get {
                 object obj = ResourceManager.GetObject("ButtonHover", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,6 +108,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap ChipHighlight {
             get {
                 object obj = ResourceManager.GetObject("ChipHighlight", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -116,6 +119,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap ChipRed {
             get {
                 object obj = ResourceManager.GetObject("ChipRed", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -126,6 +130,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap ChipYellow {
             get {
                 object obj = ResourceManager.GetObject("ChipYellow", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -136,6 +141,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap Error {
             get {
                 object obj = ResourceManager.GetObject("Error", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -146,6 +152,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap Exit {
             get {
                 object obj = ResourceManager.GetObject("Exit", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -156,6 +163,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap Help {
             get {
                 object obj = ResourceManager.GetObject("Help", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -166,6 +174,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap Home {
             get {
                 object obj = ResourceManager.GetObject("Home", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -176,6 +185,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap Info {
             get {
                 object obj = ResourceManager.GetObject("Info", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -186,6 +196,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap Redo {
             get {
                 object obj = ResourceManager.GetObject("Redo", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -196,6 +207,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap Reload {
             get {
                 object obj = ResourceManager.GetObject("Reload", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -521,6 +533,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap Title {
             get {
                 object obj = ResourceManager.GetObject("Title", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -531,6 +544,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap Undo {
             get {
                 object obj = ResourceManager.GetObject("Undo", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -541,6 +555,7 @@ namespace Ex05.Connect4UI.Properties {
         internal static System.Drawing.Bitmap Warning {
             get {
                 object obj = ResourceManager.GetObject("Warning", resourceCulture);
+
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

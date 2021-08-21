@@ -187,11 +187,19 @@
     <None Include="Resources\ButtonDown.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icon.ico" />
     <None Include="Resources\ChipHighlight.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\ChipYellow.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\ChipRed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
