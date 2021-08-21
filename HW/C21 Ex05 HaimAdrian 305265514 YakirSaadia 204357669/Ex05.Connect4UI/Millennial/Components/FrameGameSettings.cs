@@ -11,7 +11,7 @@ namespace Ex05.Connect4UI.Millennial.Components
 	/// Author: Haim Adrian<br/>
 	/// Since: 13-Aug-2021
 	/// </summary>
-	internal class FrameGameSettings : UserControl
+	internal class FrameGameSettings : PanelDoubleBuffered
 	{
 		private const char k_BoardSizeSeparator = 'x';
 

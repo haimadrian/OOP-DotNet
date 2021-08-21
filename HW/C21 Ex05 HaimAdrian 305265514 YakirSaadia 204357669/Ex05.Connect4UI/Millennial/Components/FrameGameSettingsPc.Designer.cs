@@ -1,6 +1,6 @@
 ﻿namespace Ex05.Connect4UI.Millennial.Components
 {
-	internal partial class FrameGameSettingsPc
+	internal sealed partial class FrameGameSettingsPc
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -194,8 +194,6 @@
             // 
             // FrameGameSettingsPc
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SlateGray;
             this.Controls.Add(this.m_TableLayoutPanel);
             this.ForeColor = System.Drawing.Color.White;

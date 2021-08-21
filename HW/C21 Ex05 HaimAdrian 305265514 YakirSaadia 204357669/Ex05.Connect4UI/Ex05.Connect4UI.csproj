@@ -66,16 +66,16 @@
     <Compile Include="Millennial\Components\Board\AnimatedChipInfo.cs" />
     <Compile Include="Millennial\Components\Board\GameCellInfo.cs" />
     <Compile Include="Millennial\Components\FrameGameSettings.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Millennial\Components\FrameGameSettingsPc.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Millennial\Components\FrameGameSettingsPc.Designer.cs">
       <DependentUpon>FrameGameSettingsPc.cs</DependentUpon>
     </Compile>
     <Compile Include="Millennial\Components\FrameGameSettingsMultiPlayer.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Millennial\Components\FrameGameSettingsMultiPlayer.Designer.cs">
       <DependentUpon>FrameGameSettingsMultiPlayer.cs</DependentUpon>
@@ -84,6 +84,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Millennial\Components\MenuStripRenderer.cs" />
+    <Compile Include="Millennial\Components\PanelDoubleBuffered.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Millennial\Forms\FormConnectFourApplication.cs">
       <SubType>Form</SubType>
     </Compile>

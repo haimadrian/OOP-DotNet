@@ -195,12 +195,16 @@ namespace Ex05.Connect4UI.Millennial.Forms
 		/// <summary>
 		/// This voodoo is here in order to make the setting controls repaint themselves 
 		/// because there is something wrong with their location and a glitch while
-		/// showing combo-box with selected item.. Invalidate and Refresh made no change,
-		/// hence I resize the form to force a repaint
+		/// showing combo-box with selected item..
 		/// </summary>
 		private void doVoodooResize()
 		{
-			Size = new Size(Size.Width + 1, Size.Height + 1);
+			BeginInvoke(new Action(refreshGameSettings));
+		}
+
+		private void refreshGameSettings()
+		{
+			m_FrameGameSettings.Refresh();
 		}
 
 		private void gameEngine_ActivePlayerChanged(IBoardGameEngine<eGameTool> i_GameEngine, IPlayer<eGameTool> i_Player)

@@ -9,18 +9,13 @@ namespace Ex05.Connect4UI.Millennial.Components
 	/// Author: Haim Adrian<br/>
 	/// Since: 13-Aug-2021
 	/// </summary>
-	internal partial class FrameGameSettingsPc : FrameGameSettings
+	internal sealed partial class FrameGameSettingsPc : FrameGameSettings
 	{
 		public FrameGameSettingsPc()
 		{
 			InitializeComponent();
-		}
 
-		protected override void OnLoad(EventArgs i_Args)
-		{
-			base.OnLoad(i_Args);
-
-			OnResize(i_Args);
+			OnResize(null);
 
 			fillInAiLevels();
 			fillInBoardSizes();

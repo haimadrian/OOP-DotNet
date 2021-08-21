@@ -19,7 +19,7 @@ namespace Ex05.Connect4UI.Millennial.Components.Board
 	/// Author: Haim Adrian<br/>
 	/// Since: 14-Aug-2021
 	/// </summary>
-	internal sealed class PanelBoardView : Panel
+	internal sealed class PanelBoardView : PanelDoubleBuffered
 	{
 		private readonly Brush r_BackgroundBrush;
 
@@ -40,9 +40,6 @@ namespace Ex05.Connect4UI.Millennial.Components.Board
 			r_BackgroundBrush = new SolidBrush(Color.FromArgb(34, 34, 34));
 
 			Reset();
-
-			// Set double buffered so there will be no flickers while painting
-			DoubleBuffered = true;
 		}
 
 		public IBoard<eGameTool> Board

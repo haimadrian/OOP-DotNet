@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Ex05.Connect4UI.Millennial.Components;
 
 namespace Ex05.Connect4UI.Boomer.Components
 {
-	internal sealed class PanelBoardActionsView : Panel
+	internal sealed class PanelBoardActionsView : PanelDoubleBuffered
 	{
 		private const int k_DefaultColumns = 6;
 
@@ -23,7 +24,6 @@ namespace Ex05.Connect4UI.Boomer.Components
 		{
 			r_DoubleChipPadding = 2 * PanelBoardView.ChipPadding;
 			AutoSize = true;
-			DoubleBuffered = true;
 			Count = i_Count;
 		}
 

@@ -3,10 +3,11 @@ using System.Drawing;
 using System.Windows.Forms;
 using Ex02.Connect4Engine.Api.Game.Board;
 using Ex02.Connect4Engine.Api.Matrix;
+using Ex05.Connect4UI.Millennial.Components;
 
 namespace Ex05.Connect4UI.Boomer.Components
 {
-	internal sealed class PanelBoardView : Panel
+	internal sealed class PanelBoardView : PanelDoubleBuffered
 	{
 		private const int k_ChipPadding = 10;
 
@@ -25,7 +26,6 @@ namespace Ex05.Connect4UI.Boomer.Components
 			Board = i_Board;
 
 			AutoSize = true;
-			DoubleBuffered = true;
 			Reset();
 			initButtons();
 		}
