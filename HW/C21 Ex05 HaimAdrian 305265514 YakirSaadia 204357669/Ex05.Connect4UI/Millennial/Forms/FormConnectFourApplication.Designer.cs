@@ -219,7 +219,7 @@
             // 
             this.m_ToolStripMenuItemBoomerView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.m_ToolStripMenuItemBoomerView.ForeColor = System.Drawing.Color.White;
-            this.m_ToolStripMenuItemBoomerView.Image = global::Ex05.Connect4UI.Properties.Resources.About;
+            this.m_ToolStripMenuItemBoomerView.Image = global::Ex05.Connect4UI.Properties.Resources.Poop;
             this.m_ToolStripMenuItemBoomerView.Name = "m_ToolStripMenuItemBoomerView";
             this.m_ToolStripMenuItemBoomerView.Size = new System.Drawing.Size(208, 24);
             this.m_ToolStripMenuItemBoomerView.Text = global::Ex05.Connect4UI.Properties.Resources.TextBackToBoomer;

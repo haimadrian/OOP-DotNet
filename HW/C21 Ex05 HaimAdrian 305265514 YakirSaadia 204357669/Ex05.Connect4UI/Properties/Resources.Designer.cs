@@ -193,6 +193,16 @@ namespace Ex05.Connect4UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Poop {
+            get {
+                object obj = ResourceManager.GetObject("Poop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Redo {
             get {
                 object obj = ResourceManager.GetObject("Redo", resourceCulture);
@@ -335,6 +345,15 @@ namespace Ex05.Connect4UI.Properties {
         internal static string TextGameOver {
             get {
                 return ResourceManager.GetString("TextGameOver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game is over. Please restart (Ctrl+R).
+        /// </summary>
+        internal static string TextGameOverRestart {
+            get {
+                return ResourceManager.GetString("TextGameOverRestart", resourceCulture);
             }
         }
         

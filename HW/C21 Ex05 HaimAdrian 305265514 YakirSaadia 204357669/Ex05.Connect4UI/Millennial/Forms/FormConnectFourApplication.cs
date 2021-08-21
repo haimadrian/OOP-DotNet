@@ -181,16 +181,14 @@ namespace Ex05.Connect4UI.Millennial.Forms
 
 		private void updateCursorBasedOnCurrentPlayer()
 		{
-			Bitmap bitmapToUse = null;
-
-			if ((GameEngine != null) && (GameEngine.ActivePlayer != null))
+			// Don't change cursor in case the mouse is outside board view area.
+			if (m_PanelBoardView.Bounds.Contains(PointToClient(Cursor.Position)) && (GameEngine != null) && (GameEngine.ActivePlayer != null))
 			{
-				bitmapToUse = GameEngine.ActivePlayer.GameTool == eGameTool.O ? m_PanelBoardView.RedChipImage : m_PanelBoardView.YellowChipImage;
-			}
-
-			if (bitmapToUse != null)
-			{
-				Cursor = new Cursor(bitmapToUse.GetHicon());
+				Bitmap bitmapToUse = GameEngine.ActivePlayer.GameTool == eGameTool.O ? m_PanelBoardView.RedChipImage : m_PanelBoardView.YellowChipImage;
+				if (bitmapToUse != null)
+				{
+					Cursor = new Cursor(bitmapToUse.GetHicon());
+				}
 			}
 		}
 
@@ -209,7 +207,7 @@ namespace Ex05.Connect4UI.Millennial.Forms
 		{
 			if (InvokeRequired)
 			{
-				BeginInvoke(new Action<IBoardGameEngine<eGameTool>, IPlayer<eGameTool>>(gameEngine_ActivePlayerChanged), i_GameEngine, i_Player);
+				Invoke(new Action<IBoardGameEngine<eGameTool>, IPlayer<eGameTool>>(gameEngine_ActivePlayerChanged), i_GameEngine, i_Player);
 			}
 			else
 			{
@@ -267,14 +265,28 @@ namespace Ex05.Connect4UI.Millennial.Forms
 
 		private void board_BoardUpdating(IBoard<eGameTool> i_Board, Index i_Location, eGameTool i_GameTool)
 		{
-			m_PanelBoardView.Board = i_Board;
-			m_PanelBoardView.AnimateTo(i_Location, i_GameTool);
+			if (InvokeRequired)
+			{
+				Invoke(new Action<IBoard<eGameTool>, Index, eGameTool>(board_BoardUpdating), i_Board, i_Location, i_GameTool);
+			}
+			else
+			{
+				m_PanelBoardView.Board = i_Board;
+				m_PanelBoardView.AnimateTo(i_Location, i_GameTool);
+			}
 		}
 
 		private void board_BoardUpdated(IBoard<eGameTool> i_Board, ICollection<Index> i_WinningFour)
 		{
-			m_PanelBoardView.Board = i_Board;
-			m_PanelBoardView.Refresh(i_WinningFour);
+			if (InvokeRequired)
+			{
+				BeginInvoke(new Action<IBoard<eGameTool>, ICollection<Index>>(board_BoardUpdated), i_Board, i_WinningFour);
+			}
+			else
+			{
+				m_PanelBoardView.Board = i_Board;
+				m_PanelBoardView.Refresh(i_WinningFour);
+			}
 		}
 
 		private void panelBoardView_MouseClick(object i_Sender, MouseEventArgs i_Args)
@@ -284,7 +296,11 @@ namespace Ex05.Connect4UI.Millennial.Forms
 			// Don't let user to play too fast and steal moves
 			suspendUserInput();
 
-			if (GameEngine.ActivePlayer is IBot<eGameTool>)
+			if (GameEngine.IsGameOver)
+			{
+				UpdateStatus(Resources.TextGameOverRestart, MessageBoxIcon.Error);
+			}
+			else if (GameEngine.ActivePlayer is IBot<eGameTool>)
 			{
 				UpdateStatus(string.Format(Resources.TextNotYourTurn, GameEngine.ActivePlayer.Name), MessageBoxIcon.Error);
 			}
@@ -422,13 +438,22 @@ namespace Ex05.Connect4UI.Millennial.Forms
 
 		private void redoToolStripMenuItem_Click(object i_Sender, EventArgs i_Args)
 		{
-			if ((GameEngine != null) && (!GameEngine.RedoLastMove()))
-			{
-				UpdateStatus(Resources.TextNothingToRedo, MessageBoxIcon.Information);
-			}
+			suspendUserInput();
 
-			// PC progress bar should be hidden during undo/redo, since undo move is under player control.
-			m_ToolStripProgressBarPc.Visible = false;
+			try
+			{
+				if ((GameEngine != null) && (!GameEngine.RedoLastMove()))
+				{
+					UpdateStatus(Resources.TextNothingToRedo, MessageBoxIcon.Information);
+				}
+
+				// PC progress bar should be hidden during undo/redo, since undo move is under player control.
+				m_ToolStripProgressBarPc.Visible = false;
+			}
+			finally
+			{
+				resumeUserInput();
+			}
 		}
 
 		private void restartToolStripMenuItem_Click(object i_Sender, EventArgs i_Args)

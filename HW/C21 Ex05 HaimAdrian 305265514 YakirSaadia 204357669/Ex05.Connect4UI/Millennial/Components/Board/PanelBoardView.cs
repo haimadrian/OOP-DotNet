@@ -121,7 +121,16 @@ namespace Ex05.Connect4UI.Millennial.Components.Board
 			Index result = new Index(-1, -1);
 			if (m_BoardDrawingRectangle.Contains(i_Location))
 			{
-				result = new Index(i_Location.Y / m_GameCellInfo.Height, i_Location.X / m_GameCellInfo.Width);
+				int row = Math.Max(i_Location.Y / m_GameCellInfo.Height, 0);
+				int column = Math.Max(i_Location.X / m_GameCellInfo.Width, 0);
+
+				if (Board != null)
+				{
+					row = Math.Min(row, Board.Rows - 1);
+					column = Math.Min(column, Board.Columns - 1);
+				}
+
+				result = new Index(row, column);
 			}
 
 			return result;
