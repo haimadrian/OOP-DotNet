@@ -18,11 +18,19 @@ namespace Ex05.Connect4UI.Millennial.Components
 
 		private class BrowserColors : ProfessionalColorTable
 		{
+			private static readonly Color sr_MenuItemSelectedColor = Color.FromArgb(100, 100, 100);
+
+			private static readonly Color sr_MenuItemBorderColor = Color.FromArgb(0, 30, 30, 30);
+
+			private static readonly Color sr_MenuItemSelectedGradientBeginColor = Color.FromArgb(64, 64, 64);
+
+			private static readonly Color sr_MenuItemSelectedGradientEndColor = Color.FromArgb(34, 34, 34);
+
 			public override Color MenuItemSelected
 			{
 				get
 				{
-					return Color.FromArgb(100, 100, 100);
+					return sr_MenuItemSelectedColor;
 				}
 			}
 
@@ -30,7 +38,7 @@ namespace Ex05.Connect4UI.Millennial.Components
 			{
 				get
 				{
-					return Color.FromArgb(0, 30, 30, 30);
+					return sr_MenuItemBorderColor;
 				}
 			}
 
@@ -38,7 +46,7 @@ namespace Ex05.Connect4UI.Millennial.Components
 			{
 				get
 				{
-					return Color.FromArgb(64, 64, 64);
+					return sr_MenuItemSelectedGradientBeginColor;
 				}
 			}
 
@@ -46,7 +54,7 @@ namespace Ex05.Connect4UI.Millennial.Components
 			{
 				get
 				{
-					return Color.FromArgb(34, 34, 34);
+					return sr_MenuItemSelectedGradientEndColor;
 				}
 			}
 		}

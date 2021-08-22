@@ -12,7 +12,7 @@ namespace Ex05.Connect4UI
 			try
 			{
 				// Register global exception handler to catch any unhandled exception. (Where's Application.ThreadException ?!?)
-				AppDomain.CurrentDomain.UnhandledException += appDomain_unhandledException;
+				AppDomain.CurrentDomain.UnhandledException += appDomain_UnhandledException;
 
 				Application.EnableVisualStyles();
 				Application.SetCompatibleTextRenderingDefault(false);
@@ -24,7 +24,7 @@ namespace Ex05.Connect4UI
 			}
 		}
 
-		private static void appDomain_unhandledException(object i_Sender, UnhandledExceptionEventArgs i_Args)
+		private static void appDomain_UnhandledException(object i_Sender, UnhandledExceptionEventArgs i_Args)
 		{
 			showError(i_Args.ExceptionObject as Exception);
 		}

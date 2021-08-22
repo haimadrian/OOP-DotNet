@@ -466,6 +466,15 @@ namespace Ex05.Connect4UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Players cannot have the same name.
+        /// </summary>
+        internal static string TextPlayersSameName {
+            get {
+                return ResourceManager.GetString("TextPlayersSameName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0}&apos;s turn.
         /// </summary>
         internal static string TextPlayerTurn {

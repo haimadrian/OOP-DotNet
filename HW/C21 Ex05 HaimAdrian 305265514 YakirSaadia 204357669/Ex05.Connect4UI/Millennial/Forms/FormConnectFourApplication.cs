@@ -192,12 +192,127 @@ namespace Ex05.Connect4UI.Millennial.Forms
 			}
 		}
 
+		private void makePlayerMove(MouseEventArgs i_Args)
+		{
+			bool isPlaying = false;
+
+			// Don't let user to play too fast and steal moves
+			suspendUserInput();
+
+			if (GameEngine.IsGameOver)
+			{
+				UpdateStatus(Resources.TextGameOverRestart, MessageBoxIcon.Error);
+			}
+			else if (GameEngine.ActivePlayer is IBot<eGameTool>)
+			{
+				UpdateStatus(string.Format(Resources.TextNotYourTurn, GameEngine.ActivePlayer.Name), MessageBoxIcon.Error);
+			}
+			else
+			{
+				Index selectedIndex = m_PanelBoardView.LocationToIndex(i_Args.Location);
+
+				if (selectedIndex.IsValid)
+				{
+					try
+					{
+						GameEngine.MakePlayerMove(GameEngine.ActivePlayer, selectedIndex.Column);
+
+						if (!GameEngine.IsGameOver)
+						{
+							isPlaying = true;
+
+							// Run it using another thread so we will be able to see progress bar animation
+							m_ToolStripProgressBarPc.Visible = true;
+							ThreadPool.QueueUserWorkItem(pcTurnThreadProc);
+						}
+					}
+					catch (IllegalPlayerMoveException e)
+					{
+						UpdateStatus(e.Message, MessageBoxIcon.Error);
+					}
+				}
+			}
+
+			if (!isPlaying)
+			{
+				resumeUserInput();
+			}
+		}
+
+		private void pcTurnThreadProc(object i_StateInfo)
+		{
+			try
+			{
+				Index ignore;
+				GameEngine.OptionallyPlayPcMove(out ignore);
+			}
+			finally
+			{
+				if (InvokeRequired)
+				{
+					Invoke(new Action(resumeUserInput));
+				}
+				else
+				{
+					resumeUserInput();
+				}
+			}
+		}
+
+		private void executeUndo()
+		{
+			if ((GameEngine != null) && (!GameEngine.UndoLastMove()))
+			{
+				UpdateStatus(Resources.TextNothingToUndo, MessageBoxIcon.Information);
+			}
+
+			// PC progress bar should be hidden during undo/redo, since undo move is under player control.
+			m_ToolStripProgressBarPc.Visible = false;
+		}
+
+		private void executeRedo()
+		{
+			suspendUserInput();
+
+			try
+			{
+				if ((GameEngine != null) && (!GameEngine.RedoLastMove()))
+				{
+					UpdateStatus(Resources.TextNothingToRedo, MessageBoxIcon.Information);
+				}
+
+				// PC progress bar should be hidden during undo/redo, since undo move is under player control.
+				m_ToolStripProgressBarPc.Visible = false;
+			}
+			finally
+			{
+				resumeUserInput();
+			}
+		}
+
+		private void goToHomePage()
+		{
+			if (GameEngine != null)
+			{
+				GameEngine.Restart();
+				GameEngine = null;
+				m_PanelBoardView.Reset();
+			}
+
+			disposeFrameGameSettings();
+
+			hidePlayerScore();
+			showSettingsPanel();
+			showGameSelectionButtons();
+			Cursor = Cursors.Default;
+		}
+
 		/// <summary>
 		/// This voodoo is here in order to make the setting controls repaint themselves 
 		/// because there is something wrong with their location and a glitch while
 		/// showing combo-box with selected item..
 		/// </summary>
-		private void doVoodooResize()
+		private void runGameSettingsFrameRefreshLater()
 		{
 			BeginInvoke(new Action(refreshGameSettings));
 		}
@@ -205,6 +320,83 @@ namespace Ex05.Connect4UI.Millennial.Forms
 		private void refreshGameSettings()
 		{
 			m_FrameGameSettings.Refresh();
+		}
+
+		private void showPcGameSettingsFrame()
+		{
+			if (m_FrameGameSettings == null)
+			{
+				hideGameSelectionButtons();
+				m_FrameGameSettings = new FrameGameSettingsPc();
+				m_FrameGameSettings.Dock = DockStyle.Fill;
+				m_PanelGameSettings.Controls.Add(m_FrameGameSettings);
+
+				runGameSettingsFrameRefreshLater();
+			}
+		}
+
+		private void showMultiPlayerGameSettingsFrame()
+		{
+			if (m_FrameGameSettings == null)
+			{
+				hideGameSelectionButtons();
+				m_FrameGameSettings = new FrameGameSettingsMultiPlayer();
+				m_FrameGameSettings.Dock = DockStyle.Fill;
+				m_PanelGameSettings.Controls.Add(m_FrameGameSettings);
+
+				runGameSettingsFrameRefreshLater();
+			}
+		}
+
+		private void disposeFrameGameSettings()
+		{
+			if (m_FrameGameSettings != null)
+			{
+				m_PanelGameSettings.Controls.Remove(m_FrameGameSettings);
+				m_FrameGameSettings.Dispose();
+				m_FrameGameSettings = null;
+			}
+		}
+
+		private bool validateUserSettings()
+		{
+			bool isValid = true;
+			FrameGameSettingsPc settingsPc = m_FrameGameSettings as FrameGameSettingsPc;
+			if (settingsPc != null)
+			{
+				if (string.IsNullOrEmpty(settingsPc.PlayerName))
+				{
+					isValid = false;
+					UpdateStatus(Resources.TextNameIsMandatory, MessageBoxIcon.Error);
+					settingsPc.FocusPlayerNameControl();
+				}
+			}
+			else
+			{
+				FrameGameSettingsMultiPlayer settingsMultiPlayer = m_FrameGameSettings as FrameGameSettingsMultiPlayer;
+
+				// ReSharper disable once PossibleNullReferenceException
+				if (string.IsNullOrEmpty(settingsMultiPlayer.Player1Name) || (settingsMultiPlayer.Player1Name.Trim().Length == 0))
+				{
+					isValid = false;
+					UpdateStatus(Resources.TextNameIsMandatory, MessageBoxIcon.Error);
+					settingsMultiPlayer.FocusPlayer1NameControl();
+				}
+				else if (string.IsNullOrEmpty(settingsMultiPlayer.Player2Name) || (settingsMultiPlayer.Player2Name.Trim().Length == 0))
+				{
+					isValid = false;
+					UpdateStatus(Resources.TextNameIsMandatory, MessageBoxIcon.Error);
+					settingsMultiPlayer.FocusPlayer2NameControl();
+				}
+				else if (settingsMultiPlayer.Player1Name == settingsMultiPlayer.Player2Name)
+				{
+					isValid = false;
+					UpdateStatus(Resources.TextPlayersSameName, MessageBoxIcon.Error);
+					settingsMultiPlayer.FocusPlayer1NameControl();
+				}
+			}
+
+			return isValid;
 		}
 
 		private void gameEngine_ActivePlayerChanged(IBoardGameEngine<eGameTool> i_GameEngine, IPlayer<eGameTool> i_Player)
@@ -295,69 +487,7 @@ namespace Ex05.Connect4UI.Millennial.Forms
 
 		private void panelBoardView_MouseClick(object i_Sender, MouseEventArgs i_Args)
 		{
-			bool isPlaying = false;
-
-			// Don't let user to play too fast and steal moves
-			suspendUserInput();
-
-			if (GameEngine.IsGameOver)
-			{
-				UpdateStatus(Resources.TextGameOverRestart, MessageBoxIcon.Error);
-			}
-			else if (GameEngine.ActivePlayer is IBot<eGameTool>)
-			{
-				UpdateStatus(string.Format(Resources.TextNotYourTurn, GameEngine.ActivePlayer.Name), MessageBoxIcon.Error);
-			}
-			else
-			{
-				Index selectedIndex = m_PanelBoardView.LocationToIndex(i_Args.Location);
-
-				if (selectedIndex.IsValid)
-				{
-					try
-					{
-						GameEngine.MakePlayerMove(GameEngine.ActivePlayer, selectedIndex.Column);
-
-						if (!GameEngine.IsGameOver)
-						{
-							isPlaying = true;
-
-							// Run it using another thread so we will be able to see progress bar animation
-							m_ToolStripProgressBarPc.Visible = true;
-							ThreadPool.QueueUserWorkItem(pcTurnThreadProc);
-						}
-					}
-					catch (IllegalPlayerMoveException e)
-					{
-						UpdateStatus(e.Message, MessageBoxIcon.Error);
-					}
-				}
-			}
-
-			if (!isPlaying)
-			{
-				resumeUserInput();
-			}
-		}
-
-		private void pcTurnThreadProc(object i_StateInfo)
-		{
-			try
-			{
-				Index ignore;
-				GameEngine.OptionallyPlayPcMove(out ignore);
-			}
-			finally
-			{
-				if (InvokeRequired)
-				{
-					Invoke(new Action(resumeUserInput));
-				}
-				else
-				{
-					resumeUserInput();
-				}
-			}
+			makePlayerMove(i_Args);
 		}
 
 		private void panelBoardView_MouseMove(object i_Sender, MouseEventArgs i_Args)
@@ -377,28 +507,12 @@ namespace Ex05.Connect4UI.Millennial.Forms
 
 		private void gameButtonPc_Click(object i_Sender, EventArgs i_Args)
 		{
-			if (m_FrameGameSettings == null)
-			{
-				hideGameSelectionButtons();
-				m_FrameGameSettings = new FrameGameSettingsPc();
-				m_FrameGameSettings.Dock = DockStyle.Fill;
-				m_PanelGameSettings.Controls.Add(m_FrameGameSettings);
-
-				doVoodooResize();
-			}
+			showPcGameSettingsFrame();
 		}
 
 		private void gameButtonMultiPlayer_Click(object i_Sender, EventArgs i_Args)
 		{
-			if (m_FrameGameSettings == null)
-			{
-				hideGameSelectionButtons();
-				m_FrameGameSettings = new FrameGameSettingsMultiPlayer();
-				m_FrameGameSettings.Dock = DockStyle.Fill;
-				m_PanelGameSettings.Controls.Add(m_FrameGameSettings);
-
-				doVoodooResize();
-			}
+			showMultiPlayerGameSettingsFrame();
 		}
 
 		private void formConnectFourApplication_FormClosing(object i_Sender, FormClosingEventArgs i_Args)
@@ -431,33 +545,12 @@ namespace Ex05.Connect4UI.Millennial.Forms
 
 		private void undoToolStripMenuItem_Click(object i_Sender, EventArgs i_Args)
 		{
-			if ((GameEngine != null) && (!GameEngine.UndoLastMove()))
-			{
-				UpdateStatus(Resources.TextNothingToUndo, MessageBoxIcon.Information);
-			}
-
-			// PC progress bar should be hidden during undo/redo, since undo move is under player control.
-			m_ToolStripProgressBarPc.Visible = false;
+			executeUndo();
 		}
 
 		private void redoToolStripMenuItem_Click(object i_Sender, EventArgs i_Args)
 		{
-			suspendUserInput();
-
-			try
-			{
-				if ((GameEngine != null) && (!GameEngine.RedoLastMove()))
-				{
-					UpdateStatus(Resources.TextNothingToRedo, MessageBoxIcon.Information);
-				}
-
-				// PC progress bar should be hidden during undo/redo, since undo move is under player control.
-				m_ToolStripProgressBarPc.Visible = false;
-			}
-			finally
-			{
-				resumeUserInput();
-			}
+			executeRedo();
 		}
 
 		private void restartToolStripMenuItem_Click(object i_Sender, EventArgs i_Args)
@@ -470,19 +563,7 @@ namespace Ex05.Connect4UI.Millennial.Forms
 
 		private void homeToolStripMenuItem_Click(object i_Sender, EventArgs i_Args)
 		{
-			if (GameEngine != null)
-			{
-				GameEngine.Restart();
-				GameEngine = null;
-				m_PanelBoardView.Reset();
-			}
-
-			disposeFrameGameSettings();
-
-			hidePlayerScore();
-			showSettingsPanel();
-			showGameSelectionButtons();
-			Cursor = Cursors.Default;
+			goToHomePage();
 		}
 
 		private void boomerViewToolStripMenuItem_Click(object i_Sender, EventArgs i_Args)
@@ -516,51 +597,6 @@ namespace Ex05.Connect4UI.Millennial.Forms
 				disposeFrameGameSettings();
 				hideSettingsPanel();
 			}
-		}
-
-		private void disposeFrameGameSettings()
-		{
-			if (m_FrameGameSettings != null)
-			{
-				m_PanelGameSettings.Controls.Remove(m_FrameGameSettings);
-				m_FrameGameSettings.Dispose();
-				m_FrameGameSettings = null;
-			}
-		}
-
-		private bool validateUserSettings()
-		{
-			bool isValid = true;
-			FrameGameSettingsPc settingsPc = m_FrameGameSettings as FrameGameSettingsPc;
-			if (settingsPc != null)
-			{
-				if (string.IsNullOrEmpty(settingsPc.PlayerName))
-				{
-					isValid = false;
-					UpdateStatus(Resources.TextNameIsMandatory, MessageBoxIcon.Error);
-					settingsPc.FocusPlayerNameControl();
-				}
-			}
-			else
-			{
-				FrameGameSettingsMultiPlayer settingsMultiPlayer = m_FrameGameSettings as FrameGameSettingsMultiPlayer;
-
-				// ReSharper disable once PossibleNullReferenceException
-				if (string.IsNullOrEmpty(settingsMultiPlayer.Player1Name))
-				{
-					isValid = false;
-					UpdateStatus(Resources.TextNameIsMandatory, MessageBoxIcon.Error);
-					settingsMultiPlayer.FocusPlayer1NameControl();
-				}
-				else if (string.IsNullOrEmpty(settingsMultiPlayer.Player2Name))
-				{
-					isValid = false;
-					UpdateStatus(Resources.TextNameIsMandatory, MessageBoxIcon.Error);
-					settingsMultiPlayer.FocusPlayer2NameControl();
-				}
-			}
-
-			return isValid;
 		}
 	}
 }

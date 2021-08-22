@@ -33,7 +33,7 @@ namespace Ex05.Connect4UI.Boomer.Forms
 		private void buttonSwitchToMillennial_Click(object i_Sender, EventArgs i_Args)
 		{
 			Hide();
-			
+
 			FormConnectFourApplication formConnectFourApplication = new FormConnectFourApplication();
 			formConnectFourApplication.FormClosed += formConnectFourApplication_OnFormClosed;
 
@@ -47,25 +47,40 @@ namespace Ex05.Connect4UI.Boomer.Forms
 
 		private void buttonStart_Click(object i_Sender, EventArgs i_Args)
 		{
-			if ((m_TextBoxPlayer1.Text.Trim().Length > 0) && (m_TextBoxPlayer2.Text.Trim().Length > 0))
+			if (validateSettings())
 			{
 				Hide();
-				
+
 				FormConnectFourMain formConnectFourMain = new FormConnectFourMain(initGameEngine());
 				formConnectFourMain.FormClosed += formConnectFourApplication_OnFormClosed;
 
 				formConnectFourMain.ShowDialog();
 			}
-			else
+		}
+
+		private bool validateSettings()
+		{
+			bool isValid = true;
+
+			if ((m_TextBoxPlayer1.Text.Trim().Length == 0) || (m_TextBoxPlayer2.Text.Trim().Length == 0))
 			{
+				isValid = false;
 				MessageBox.Show(Resources.TextNameIsMandatory, Resources.TextBoomerError, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+			else if (m_TextBoxPlayer1.Text == m_TextBoxPlayer2.Text)
+			{
+				isValid = false;
+				MessageBox.Show(Resources.TextPlayersSameName, Resources.TextBoomerError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+
+			return isValid;
 		}
 
 		private IBoardGameEngine<eGameTool> initGameEngine()
 		{
-			IBoardGameEngine<eGameTool> gameEngine =
-				GameController.Instance.NewConnect4GameEngine<eGameTool>((int)m_NumericUpDownRows.Value, (int)m_NumericUpDownCols.Value);
+			IBoardGameEngine<eGameTool> gameEngine = GameController.Instance.NewConnect4GameEngine<eGameTool>(
+				(int)m_NumericUpDownRows.Value,
+				(int)m_NumericUpDownCols.Value);
 			IPlayer<eGameTool> firstPlayer;
 			IPlayer<eGameTool> secondPlayer;
 

@@ -63,7 +63,6 @@
     <Compile Include="Boomer\Forms\FormGameSettings.Designer.cs">
       <DependentUpon>FormGameSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Millennial\Components\Board\AnimatedChipInfo.cs" />
     <Compile Include="Millennial\Components\Board\GameCellInfo.cs" />
     <Compile Include="Millennial\Components\FrameGameSettings.cs">
       <SubType>Component</SubType>

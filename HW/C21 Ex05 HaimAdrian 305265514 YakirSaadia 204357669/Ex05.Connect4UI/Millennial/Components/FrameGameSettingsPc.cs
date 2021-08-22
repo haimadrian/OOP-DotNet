@@ -23,21 +23,6 @@ namespace Ex05.Connect4UI.Millennial.Components
 			m_TextBoxPlayer.Focus();
 		}
 
-		protected override void OnResize(EventArgs i_Args)
-		{
-			// Vertically center the text boxes
-			int[] rowHeights = m_TableLayoutPanel.GetRowHeights();
-			if (rowHeights.Length > 0)
-			{
-				VerticalCenter(rowHeights[0], m_TextBoxPlayer, 0);
-				VerticalCenter(rowHeights[1], m_ComboBoxDifficulty, 0);
-				VerticalCenter(rowHeights[2], m_ComboBoxBoardSize, 0);
-				VerticalCenter(rowHeights[2], m_LabelBoardSizeExplanation, m_ComboBoxBoardSize.Height);
-			}
-
-			base.OnResize(i_Args);
-		}
-
 		public string PlayerName
 		{
 			get
@@ -60,6 +45,21 @@ namespace Ex05.Connect4UI.Millennial.Components
 			{
 				return m_ComboBoxBoardSize.Text;
 			}
+		}
+
+		protected override void OnResize(EventArgs i_Args)
+		{
+			// Vertically center the text boxes
+			int[] rowHeights = m_TableLayoutPanel.GetRowHeights();
+			if (rowHeights.Length > 0)
+			{
+				VerticalCenter(rowHeights[0], m_TextBoxPlayer, 0);
+				VerticalCenter(rowHeights[1], m_ComboBoxDifficulty, 0);
+				VerticalCenter(rowHeights[2], m_ComboBoxBoardSize, 0);
+				VerticalCenter(rowHeights[2], m_LabelBoardSizeExplanation, m_ComboBoxBoardSize.Height);
+			}
+
+			base.OnResize(i_Args);
 		}
 
 		public void FocusPlayerNameControl()

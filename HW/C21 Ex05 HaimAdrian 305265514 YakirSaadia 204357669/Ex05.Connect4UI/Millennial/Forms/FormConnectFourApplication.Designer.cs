@@ -26,6 +26,7 @@
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
+		// This must be with Capital letter, even though it is private, cause this is how VS designer generated it and it doesn't work with lower cased i.
 		private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConnectFourApplication));

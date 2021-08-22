@@ -92,8 +92,8 @@ namespace Ex05.Connect4UI.Millennial.Components.Board
 			Point location = IndexToLocation(i_Location);
 			m_AnimatedChipInfo = new AnimatedChipInfo(location, i_GameTool);
 
-			int step = Math.Max(location.Y / 100, 2);
-			for (int yCoordinate = m_BoardDrawingRectangle.Y; yCoordinate < location.Y; yCoordinate += step)
+			const int k_PixelsPerStep = 3;
+			for (int yCoordinate = m_BoardDrawingRectangle.Y - (int)(0.75 * m_GameCellInfo.Height); yCoordinate < location.Y; yCoordinate += k_PixelsPerStep)
 			{
 				// As we call DoEvents, we might get a Refresh during the loop, which stops the animation.
 				// In this case, e.g. when user presses Ctrl+Y quickly, m_AnimatedChipInfo is set to null, so we'd like to stop the loop.
@@ -285,6 +285,53 @@ namespace Ex05.Connect4UI.Millennial.Components.Board
 					path.AddEllipse(ellipseRect);
 					m_BoardDrawingRegion.Exclude(path);
 				}
+			}
+		}
+
+		private struct AnimatedChipInfo
+		{
+			private readonly eGameTool r_GameTool;
+
+			private Point m_Location;
+
+			public AnimatedChipInfo(Point i_Location, eGameTool i_GameTool)
+			{
+				m_Location = i_Location;
+				r_GameTool = i_GameTool;
+			}
+
+			public Point Location
+			{
+				get
+				{
+					return m_Location;
+				}
+
+				set
+				{
+					m_Location = value;
+				}
+			}
+
+			public eGameTool GameTool
+			{
+				get
+				{
+					return r_GameTool;
+				}
+			}
+
+			public bool IsEmpty
+			{
+				get
+				{
+					return GameTool == eGameTool.None;
+				}
+			}
+
+			public override string ToString()
+			{
+				return string.Format("{{ Location={0}, GameTool={1} }}", Location.ToString(), GameTool.ToString());
 			}
 		}
 	}

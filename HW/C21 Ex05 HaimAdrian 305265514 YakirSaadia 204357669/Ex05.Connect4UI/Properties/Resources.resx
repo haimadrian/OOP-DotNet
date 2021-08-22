@@ -256,6 +256,9 @@
   <data name="TextPlayerTurn" xml:space="preserve">
     <value>{0}'s turn</value>
   </data>
+  <data name="TextPlayersSameName" xml:space="preserve">
+    <value>Players cannot have the same name</value>
+  </data>
   <data name="TextReady" xml:space="preserve">
     <value>Ready</value>
   </data>

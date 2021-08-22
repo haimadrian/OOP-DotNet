@@ -92,7 +92,7 @@ namespace Ex05.Connect4UI.Boomer.Forms
 			m_PanelBoardActionsView.Reset();
 		}
 
-		private void actionButton_ActionButtonClick(object i_Sender, EventArgs i_Args)
+		private void makePlayerMove(object i_Sender)
 		{
 			suspendUserInput();
 
@@ -137,21 +137,31 @@ namespace Ex05.Connect4UI.Boomer.Forms
 			}
 		}
 
+		private void highlightActivePlayerScore(IPlayer<eGameTool> i_Player)
+		{
+			if (m_LabelPlayer1Score.Text.StartsWith(i_Player.Name))
+			{
+				m_LabelPlayer1Score.Font = new Font(m_LabelPlayer1Score.Font, FontStyle.Bold);
+				m_LabelPlayer2Score.Font = new Font(m_LabelPlayer2Score.Font, FontStyle.Regular);
+			}
+			else
+			{
+				m_LabelPlayer1Score.Font = new Font(m_LabelPlayer1Score.Font, FontStyle.Regular);
+				m_LabelPlayer2Score.Font = new Font(m_LabelPlayer2Score.Font, FontStyle.Bold);
+			}
+		}
+
+		private void actionButton_ActionButtonClick(object i_Sender, EventArgs i_Args)
+		{
+			makePlayerMove(i_Sender);
+		}
+
 		private void gameEngine_ActivePlayerChanged(IBoardGameEngine<eGameTool> i_GameEngine, IPlayer<eGameTool> i_Player)
 		{
 			// Might be null when player undo the first move
 			if (i_Player != null)
 			{
-				if (m_LabelPlayer1Score.Text.StartsWith(i_Player.Name))
-				{
-					m_LabelPlayer1Score.Font = new Font(m_LabelPlayer1Score.Font, FontStyle.Bold);
-					m_LabelPlayer2Score.Font = new Font(m_LabelPlayer2Score.Font, FontStyle.Regular);
-				}
-				else
-				{
-					m_LabelPlayer1Score.Font = new Font(m_LabelPlayer1Score.Font, FontStyle.Regular);
-					m_LabelPlayer2Score.Font = new Font(m_LabelPlayer2Score.Font, FontStyle.Bold);
-				}
+				highlightActivePlayerScore(i_Player);
 			}
 		}
 
@@ -202,12 +212,12 @@ namespace Ex05.Connect4UI.Boomer.Forms
 			Hide();
 
 			FormConnectFourApplication formConnectFourApplication = new FormConnectFourApplication();
-			formConnectFourApplication.FormClosed += formConnectFourApplication_OnFormClosed;
+			formConnectFourApplication.FormClosed += formConnectFourApplication_FormClosed;
 
 			formConnectFourApplication.ShowDialog();
 		}
 
-		private void formConnectFourApplication_OnFormClosed(object i_Sender, FormClosedEventArgs i_Args)
+		private void formConnectFourApplication_FormClosed(object i_Sender, FormClosedEventArgs i_Args)
 		{
 			Close();
 		}

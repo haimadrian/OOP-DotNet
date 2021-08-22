@@ -13,27 +13,12 @@ namespace Ex05.Connect4UI.Millennial.Components
 		public FrameGameSettingsMultiPlayer()
 		{
 			InitializeComponent();
-			
+
 			OnResize(null);
 
 			fillInBoardSizes();
 
 			m_TextBoxPlayer1.Focus();
-		}
-
-		protected override void OnResize(EventArgs i_Args)
-		{
-			// Vertically center the text boxes
-			int[] rowHeights = m_TableLayoutPanel.GetRowHeights();
-			if (rowHeights.Length > 0)
-			{
-				VerticalCenter(rowHeights[0], m_TextBoxPlayer1, 0);
-				VerticalCenter(rowHeights[1], m_TextBoxPlayer2, 0);
-				VerticalCenter(rowHeights[2], m_ComboBoxBoardSize, 0);
-				VerticalCenter(rowHeights[2], m_LabelBoardSizeExplanation, m_ComboBoxBoardSize.Height);
-			}
-
-			base.OnResize(i_Args);
 		}
 
 		public string Player1Name
@@ -58,6 +43,21 @@ namespace Ex05.Connect4UI.Millennial.Components
 			{
 				return m_ComboBoxBoardSize.Text;
 			}
+		}
+
+		protected override void OnResize(EventArgs i_Args)
+		{
+			// Vertically center the text boxes
+			int[] rowHeights = m_TableLayoutPanel.GetRowHeights();
+			if (rowHeights.Length > 0)
+			{
+				VerticalCenter(rowHeights[0], m_TextBoxPlayer1, 0);
+				VerticalCenter(rowHeights[1], m_TextBoxPlayer2, 0);
+				VerticalCenter(rowHeights[2], m_ComboBoxBoardSize, 0);
+				VerticalCenter(rowHeights[2], m_LabelBoardSizeExplanation, m_ComboBoxBoardSize.Height);
+			}
+
+			base.OnResize(i_Args);
 		}
 
 		public void FocusPlayer1NameControl()
