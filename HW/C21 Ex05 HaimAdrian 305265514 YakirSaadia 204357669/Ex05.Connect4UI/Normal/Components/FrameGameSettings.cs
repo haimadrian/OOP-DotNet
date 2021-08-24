@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Ex05.Connect4UI.Millennial.Components
+namespace Ex05.Connect4UI.Normal.Components
 {
 	/// <summary>
 	/// This class supposed to be abstract class that implements the common stuff related to

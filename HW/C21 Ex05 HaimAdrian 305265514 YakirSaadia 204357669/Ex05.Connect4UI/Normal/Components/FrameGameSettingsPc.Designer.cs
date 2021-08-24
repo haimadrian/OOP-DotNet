@@ -1,4 +1,4 @@
-﻿namespace Ex05.Connect4UI.Millennial.Components
+﻿namespace Ex05.Connect4UI.Normal.Components
 {
 	internal sealed partial class FrameGameSettingsPc
 	{

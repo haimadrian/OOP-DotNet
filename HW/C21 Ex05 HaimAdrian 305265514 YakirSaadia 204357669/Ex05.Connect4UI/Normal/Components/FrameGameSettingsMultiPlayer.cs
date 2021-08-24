@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ex05.Connect4UI.Millennial.Components
+namespace Ex05.Connect4UI.Normal.Components
 {
 	/// <summary>
 	/// Game settings frame to configure a multi player match.<br/>

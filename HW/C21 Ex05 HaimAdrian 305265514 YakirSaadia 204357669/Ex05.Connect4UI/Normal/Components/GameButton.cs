@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Ex05.Connect4UI.Millennial.Components
+namespace Ex05.Connect4UI.Normal.Components
 {
 	/// <summary>
 	/// A custom game button to use images for having better style for buttons.<br/>

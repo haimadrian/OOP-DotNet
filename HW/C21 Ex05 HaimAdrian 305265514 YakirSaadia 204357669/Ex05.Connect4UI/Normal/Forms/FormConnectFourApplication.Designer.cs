@@ -1,4 +1,4 @@
-﻿namespace Ex05.Connect4UI.Millennial.Forms
+﻿namespace Ex05.Connect4UI.Normal.Forms
 {
 	internal partial class FormConnectFourApplication
 	{
@@ -48,13 +48,13 @@
             this.m_LabelPlayer1Score = new System.Windows.Forms.Label();
             this.m_LabelScoreSeparator = new System.Windows.Forms.Label();
             this.m_LabelPlayer2Score = new System.Windows.Forms.Label();
-            this.m_PanelBoardView = new Ex05.Connect4UI.Millennial.Components.Board.PanelBoardView();
-            this.m_PanelGameSettings = new Ex05.Connect4UI.Millennial.Components.PanelDoubleBuffered();
+            this.m_PanelBoardView = new Ex05.Connect4UI.Normal.Components.Board.PanelBoardView();
+            this.m_PanelGameSettings = new Ex05.Connect4UI.Normal.Components.PanelDoubleBuffered();
             this.m_PanelStartButtons = new System.Windows.Forms.Panel();
-            this.m_GameButtonStart = new Ex05.Connect4UI.Millennial.Components.GameButton();
-            this.m_GameButtonBack = new Ex05.Connect4UI.Millennial.Components.GameButton();
-            this.m_GameButtonMultiPlayer = new Ex05.Connect4UI.Millennial.Components.GameButton();
-            this.m_GameButtonPc = new Ex05.Connect4UI.Millennial.Components.GameButton();
+            this.m_GameButtonStart = new Ex05.Connect4UI.Normal.Components.GameButton();
+            this.m_GameButtonBack = new Ex05.Connect4UI.Normal.Components.GameButton();
+            this.m_GameButtonMultiPlayer = new Ex05.Connect4UI.Normal.Components.GameButton();
+            this.m_GameButtonPc = new Ex05.Connect4UI.Normal.Components.GameButton();
             this.m_StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_PictureBoxTitle)).BeginInit();
             this.m_MenuStripActions.SuspendLayout();
@@ -432,10 +432,10 @@
 		private System.Windows.Forms.StatusStrip m_StatusStrip;
 		private System.Windows.Forms.ToolStripStatusLabel m_ToolStripStatusLabelGameStatus;
 		private System.Windows.Forms.ToolStripProgressBar m_ToolStripProgressBarPc;
-		private Ex05.Connect4UI.Millennial.Components.Board.PanelBoardView m_PanelBoardView;
-		private Ex05.Connect4UI.Millennial.Components.PanelDoubleBuffered m_PanelGameSettings;
-		private Ex05.Connect4UI.Millennial.Components.GameButton m_GameButtonPc;
-		private Ex05.Connect4UI.Millennial.Components.GameButton m_GameButtonMultiPlayer;
+		private Ex05.Connect4UI.Normal.Components.Board.PanelBoardView m_PanelBoardView;
+		private Ex05.Connect4UI.Normal.Components.PanelDoubleBuffered m_PanelGameSettings;
+		private Ex05.Connect4UI.Normal.Components.GameButton m_GameButtonPc;
+		private Ex05.Connect4UI.Normal.Components.GameButton m_GameButtonMultiPlayer;
 		private System.Windows.Forms.ToolStripMenuItem m_ToolStripMenuItemFile;
 		private System.Windows.Forms.ToolStripMenuItem m_ToolStripMenuItemHome;
 		private System.Windows.Forms.ToolStripMenuItem m_ToolStripMenuItemExit;
@@ -445,8 +445,8 @@
 		private System.Windows.Forms.ToolStripMenuItem m_ToolStripMenuItemRedo;
 		private System.Windows.Forms.ToolStripMenuItem m_ToolStripMenuItemHelp;
 		private System.Windows.Forms.ToolStripMenuItem m_ToolStripMenuItemBoomerView;
-		private Ex05.Connect4UI.Millennial.Components.GameButton m_GameButtonBack;
-		private Ex05.Connect4UI.Millennial.Components.GameButton m_GameButtonStart;
+		private Ex05.Connect4UI.Normal.Components.GameButton m_GameButtonBack;
+		private Ex05.Connect4UI.Normal.Components.GameButton m_GameButtonStart;
 		private System.Windows.Forms.Panel m_PanelStartButtons;
 		private System.Windows.Forms.TableLayoutPanel m_TableLayoutPanelScore;
 		private System.Windows.Forms.Label m_LabelScoreSeparator;

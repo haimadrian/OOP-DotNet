@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Ex05.Connect4UI.Properties;
 
-namespace Ex05.Connect4UI.Millennial.Forms
+namespace Ex05.Connect4UI.Normal.Forms
 {
 	/// <summary>
 	/// This class represents a MessageBox with custom style, because .Net's MessageBox does not support styles.<br/>

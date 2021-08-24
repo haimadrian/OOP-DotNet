@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Ex05.Connect4UI.Millennial.Components.Board
+namespace Ex05.Connect4UI.Normal.Components.Board
 {
 	internal class GameCellInfo : IDisposable
 	{

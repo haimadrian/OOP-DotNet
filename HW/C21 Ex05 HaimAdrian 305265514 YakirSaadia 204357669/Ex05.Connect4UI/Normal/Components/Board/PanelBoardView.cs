@@ -7,7 +7,7 @@ using Ex02.Connect4Engine.Api.Game.Board;
 using Ex02.Connect4Engine.Api.Matrix;
 using Ex05.Connect4UI.Properties;
 
-namespace Ex05.Connect4UI.Millennial.Components.Board
+namespace Ex05.Connect4UI.Normal.Components.Board
 {
 	/// <summary>
 	/// This class responsible for painting a connect four board.<br/>
@@ -87,23 +87,23 @@ namespace Ex05.Connect4UI.Millennial.Components.Board
 			Invalidate();
 		}
 
-		public void AnimateTo(Index i_Location, eGameTool i_GameTool)
+		public void AnimateTo(Index i_Destination, eGameTool i_GameTool)
 		{
-			Point location = IndexToLocation(i_Location);
-			m_AnimatedChipInfo = new AnimatedChipInfo(location, i_GameTool);
+			Point destination = IndexToLocation(i_Destination);
+			m_AnimatedChipInfo = new AnimatedChipInfo(destination, i_GameTool);
 
-			const int k_PixelsPerStep = 3;
-			for (int yCoordinate = m_BoardDrawingRectangle.Y - (int)(0.75 * m_GameCellInfo.Height); yCoordinate < location.Y; yCoordinate += k_PixelsPerStep)
+			int pixelsPerStep = Math.Max(m_GameCellInfo.Height / 30, 2);
+			for (int yCoordinate = m_BoardDrawingRectangle.Y - (int)(0.75 * m_GameCellInfo.Height); yCoordinate < destination.Y; yCoordinate += pixelsPerStep)
 			{
 				// As we call DoEvents, we might get a Refresh during the loop, which stops the animation.
 				// In this case, e.g. when user presses Ctrl+Y quickly, m_AnimatedChipInfo is set to null, so we'd like to stop the loop.
 				if (m_AnimatedChipInfo.IsEmpty)
 				{
-					yCoordinate = location.Y;
+					yCoordinate = destination.Y;
 				}
 				else
 				{
-					m_AnimatedChipInfo.Location = new Point(location.X, yCoordinate);
+					m_AnimatedChipInfo.Location = new Point(destination.X, yCoordinate);
 					Invalidate();
 
 					// Let the events run and don't block the main thread due to this loop

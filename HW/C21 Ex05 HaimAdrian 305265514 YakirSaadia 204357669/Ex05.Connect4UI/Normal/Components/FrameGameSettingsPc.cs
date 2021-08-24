@@ -1,7 +1,7 @@
 ﻿using System;
 using Ex02.Connect4Engine.Api.Game.Player;
 
-namespace Ex05.Connect4UI.Millennial.Components
+namespace Ex05.Connect4UI.Normal.Components
 {
 	/// <summary>
 	/// Game settings frame to configure a match against PC.<br/>

@@ -63,39 +63,39 @@
     <Compile Include="Boomer\Forms\FormGameSettings.Designer.cs">
       <DependentUpon>FormGameSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Millennial\Components\Board\GameCellInfo.cs" />
-    <Compile Include="Millennial\Components\FrameGameSettings.cs">
+    <Compile Include="Normal\Components\Board\GameCellInfo.cs" />
+    <Compile Include="Normal\Components\FrameGameSettings.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Millennial\Components\FrameGameSettingsPc.cs">
+    <Compile Include="Normal\Components\FrameGameSettingsPc.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Millennial\Components\FrameGameSettingsPc.Designer.cs">
+    <Compile Include="Normal\Components\FrameGameSettingsPc.Designer.cs">
       <DependentUpon>FrameGameSettingsPc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Millennial\Components\FrameGameSettingsMultiPlayer.cs">
+    <Compile Include="Normal\Components\FrameGameSettingsMultiPlayer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Millennial\Components\FrameGameSettingsMultiPlayer.Designer.cs">
+    <Compile Include="Normal\Components\FrameGameSettingsMultiPlayer.Designer.cs">
       <DependentUpon>FrameGameSettingsMultiPlayer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Millennial\Components\GameButton.cs">
+    <Compile Include="Normal\Components\GameButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Millennial\Components\MenuStripRenderer.cs" />
-    <Compile Include="Millennial\Components\PanelDoubleBuffered.cs">
+    <Compile Include="Normal\Components\MenuStripRenderer.cs" />
+    <Compile Include="Normal\Components\PanelDoubleBuffered.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Millennial\Forms\FormConnectFourApplication.cs">
+    <Compile Include="Normal\Forms\FormConnectFourApplication.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Millennial\Forms\FormConnectFourApplication.Designer.cs">
+    <Compile Include="Normal\Forms\FormConnectFourApplication.Designer.cs">
       <DependentUpon>FormConnectFourApplication.cs</DependentUpon>
     </Compile>
-    <Compile Include="Millennial\Forms\FormMessageBox.cs">
+    <Compile Include="Normal\Forms\FormMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Millennial\Forms\FormMessageBox.Designer.cs">
+    <Compile Include="Normal\Forms\FormMessageBox.Designer.cs">
       <DependentUpon>FormMessageBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -103,7 +103,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Millennial\Components\Board\PanelBoardView.cs">
+    <Compile Include="Normal\Components\Board\PanelBoardView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
@@ -129,17 +129,17 @@
     <EmbeddedResource Include="Boomer\Forms\FormGameSettings.resx">
       <DependentUpon>FormGameSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Millennial\Components\FrameGameSettingsPc.resx">
+    <EmbeddedResource Include="Normal\Components\FrameGameSettingsPc.resx">
       <DependentUpon>FrameGameSettingsPc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Millennial\Components\FrameGameSettingsMultiPlayer.resx">
+    <EmbeddedResource Include="Normal\Components\FrameGameSettingsMultiPlayer.resx">
       <DependentUpon>FrameGameSettingsMultiPlayer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Millennial\Forms\FormConnectFourApplication.resx">
+    <EmbeddedResource Include="Normal\Forms\FormConnectFourApplication.resx">
       <DependentUpon>FormConnectFourApplication.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Millennial\Forms\FormMessageBox.resx">
+    <EmbeddedResource Include="Normal\Forms\FormMessageBox.resx">
       <DependentUpon>FormMessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

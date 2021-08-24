@@ -12,9 +12,9 @@ using Ex02.Connect4Engine.Api.Game.Player;
 using Ex02.Connect4Engine.Api.Matrix;
 using Ex02.Connect4Engine.Api.System;
 using Ex05.Connect4UI.Boomer.Forms;
-using Ex05.Connect4UI.Millennial.Components;
+using Ex05.Connect4UI.Normal.Components;
 
-namespace Ex05.Connect4UI.Millennial.Forms
+namespace Ex05.Connect4UI.Normal.Forms
 {
 	/// <summary>
 	/// Main window of our application.<br/>

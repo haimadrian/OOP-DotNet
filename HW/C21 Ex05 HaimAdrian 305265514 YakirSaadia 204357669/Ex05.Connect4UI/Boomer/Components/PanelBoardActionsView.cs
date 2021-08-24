@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Ex05.Connect4UI.Millennial.Components;
+using Ex05.Connect4UI.Normal.Components;
 
 namespace Ex05.Connect4UI.Boomer.Components
 {

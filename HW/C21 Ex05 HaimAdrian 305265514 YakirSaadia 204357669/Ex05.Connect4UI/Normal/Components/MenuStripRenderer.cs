@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace Ex05.Connect4UI.Millennial.Components
+namespace Ex05.Connect4UI.Normal.Components
 {
 	/// <summary>
 	/// This class created in order to highlight menu items when hovering over them,

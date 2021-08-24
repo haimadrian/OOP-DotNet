@@ -9,7 +9,7 @@ using Ex02.Connect4Engine.Api.Game.Exceptions;
 using Ex02.Connect4Engine.Api.Game.Player;
 using Ex02.Connect4Engine.Api.Matrix;
 using Ex02.Connect4Engine.Api.System;
-using Ex05.Connect4UI.Millennial.Forms;
+using Ex05.Connect4UI.Normal.Forms;
 using Ex05.Connect4UI.Properties;
 
 namespace Ex05.Connect4UI.Boomer.Forms

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Ex05.Connect4UI.Millennial.Components
+namespace Ex05.Connect4UI.Normal.Components
 {
 	internal class PanelDoubleBuffered : Panel
 	{

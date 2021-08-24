@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using Ex02.Connect4Engine.Api.Controller;
 using Ex02.Connect4Engine.Api.Game.Engine;
 using Ex02.Connect4Engine.Api.Game.Player;
-using Ex05.Connect4UI.Millennial.Forms;
+using Ex05.Connect4UI.Normal.Forms;
 using Ex05.Connect4UI.Properties;
 
 namespace Ex05.Connect4UI.Boomer.Forms

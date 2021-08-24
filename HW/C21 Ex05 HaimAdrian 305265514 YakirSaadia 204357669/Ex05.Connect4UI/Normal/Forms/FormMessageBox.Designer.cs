@@ -1,4 +1,4 @@
-﻿namespace Ex05.Connect4UI.Millennial.Forms
+﻿namespace Ex05.Connect4UI.Normal.Forms
 {
 	internal partial class FormMessageBox
 	{
