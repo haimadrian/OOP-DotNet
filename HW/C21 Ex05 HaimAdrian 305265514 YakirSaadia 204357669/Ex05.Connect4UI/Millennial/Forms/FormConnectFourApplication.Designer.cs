@@ -192,7 +192,7 @@
             this.m_ToolStripMenuItemUndo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.m_ToolStripMenuItemUndo.Size = new System.Drawing.Size(170, 24);
             this.m_ToolStripMenuItemUndo.Text = global::Ex05.Connect4UI.Properties.Resources.TextUndo;
-			this.m_ToolStripMenuItemUndo.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
+            this.m_ToolStripMenuItemUndo.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
             // 
             // m_ToolStripMenuItemRedo
             // 
@@ -203,7 +203,7 @@
             this.m_ToolStripMenuItemRedo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
             this.m_ToolStripMenuItemRedo.Size = new System.Drawing.Size(170, 24);
             this.m_ToolStripMenuItemRedo.Text = global::Ex05.Connect4UI.Properties.Resources.TextRedo;
-			this.m_ToolStripMenuItemRedo.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
+            this.m_ToolStripMenuItemRedo.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
             // m_ToolStripMenuItemHelp
             // 
@@ -213,7 +213,7 @@
             this.m_ToolStripMenuItemHelp.Name = "m_ToolStripMenuItemHelp";
             this.m_ToolStripMenuItemHelp.Size = new System.Drawing.Size(49, 23);
             this.m_ToolStripMenuItemHelp.Text = global::Ex05.Connect4UI.Properties.Resources.TextHelp;
-			this.m_ToolStripMenuItemHelp.DropDownClosed += new System.EventHandler(this.toolStripMenuItem_DropDownToggle);
+            this.m_ToolStripMenuItemHelp.DropDownClosed += new System.EventHandler(this.toolStripMenuItem_DropDownToggle);
             this.m_ToolStripMenuItemHelp.DropDownOpened += new System.EventHandler(this.toolStripMenuItem_DropDownToggle);
             // 
             // m_ToolStripMenuItemBoomerView
@@ -224,7 +224,7 @@
             this.m_ToolStripMenuItemBoomerView.Name = "m_ToolStripMenuItemBoomerView";
             this.m_ToolStripMenuItemBoomerView.Size = new System.Drawing.Size(208, 24);
             this.m_ToolStripMenuItemBoomerView.Text = global::Ex05.Connect4UI.Properties.Resources.TextBackToBoomer;
-			this.m_ToolStripMenuItemBoomerView.Click += new System.EventHandler(this.boomerViewToolStripMenuItem_Click);
+            this.m_ToolStripMenuItemBoomerView.Click += new System.EventHandler(this.boomerViewToolStripMenuItem_Click);
             // 
             // m_TableLayoutPanelScore
             // 
@@ -332,7 +332,7 @@
             this.m_GameButtonStart.TabIndex = 2;
             this.m_GameButtonStart.TabStop = false;
             this.m_GameButtonStart.Text = global::Ex05.Connect4UI.Properties.Resources.TextStart;
-			this.m_GameButtonStart.UseVisualStyleBackColor = false;
+            this.m_GameButtonStart.UseVisualStyleBackColor = false;
             this.m_GameButtonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // m_GameButtonBack
@@ -371,7 +371,7 @@
             this.m_GameButtonMultiPlayer.TabIndex = 0;
             this.m_GameButtonMultiPlayer.TabStop = false;
             this.m_GameButtonMultiPlayer.Text = global::Ex05.Connect4UI.Properties.Resources.TextMultiPlayer;
-			this.m_GameButtonMultiPlayer.UseVisualStyleBackColor = false;
+            this.m_GameButtonMultiPlayer.UseVisualStyleBackColor = false;
             this.m_GameButtonMultiPlayer.Click += new System.EventHandler(this.gameButtonMultiPlayer_Click);
             // 
             // m_GameButtonPc
@@ -391,7 +391,7 @@
             this.m_GameButtonPc.TabIndex = 1;
             this.m_GameButtonPc.TabStop = false;
             this.m_GameButtonPc.Text = global::Ex05.Connect4UI.Properties.Resources.TextPc;
-			this.m_GameButtonPc.UseVisualStyleBackColor = false;
+            this.m_GameButtonPc.UseVisualStyleBackColor = false;
             this.m_GameButtonPc.Click += new System.EventHandler(this.gameButtonPc_Click);
             // 
             // FormConnectFourApplication
@@ -410,7 +410,7 @@
             this.Name = "FormConnectFourApplication";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = global::Ex05.Connect4UI.Properties.Resources.TextConnectFour;
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formConnectFourApplication_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formConnectFourApplication_FormClosing);
             this.m_StatusStrip.ResumeLayout(false);
             this.m_StatusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.m_PictureBoxTitle)).EndInit();
