@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="Ex03.ConsoleUI.App.Menus.AddVehicleMenu">
+    <Position X="6.25" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAEAAAAAAAACAAAAAAACAAAAAAA=</HashCode>
+      <FileName>App\Menus\AddVehicleMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ex03.ConsoleUI.App.Menus.AMenu&lt;TMenuItem&gt;">
+    <Position X="8.75" Y="0.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAABAAAAGIAAAACAAAACAgAg=</HashCode>
+      <FileName>App\Menus\AMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ex03.ConsoleUI.App.Menus.ConsoleMenuManager&lt;TMenuItem&gt;">
+    <Position X="13.75" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAgAAAAAAEAAAAIqAAAACAAAA=</HashCode>
+      <FileName>App\Menus\ConsoleMenuManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ex03.ConsoleUI.App.Menus.ListVehiclesLicenseNumberMenu">
+    <Position X="8.5" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABACAAAEAAAAAAAACAAAAAAACAAAAAAA=</HashCode>
+      <FileName>App\Menus\ListVehiclesLicenseNumberMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ex03.ConsoleUI.App.Menus.MainMenu">
+    <Position X="14" Y="4.25" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAACAAAAiCAAAABAQAAgEGAEAAAABggEABAAA=</HashCode>
+      <FileName>App\Menus\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ex03.ConsoleUI.App.Menus.UpdateVehicleGarageStateMenu">
+    <Position X="11.25" Y="4.25" Width="2.5" />
+    <InheritanceLine Type="Ex03.ConsoleUI.App.Menus.AMenu&lt;TMenuItem&gt;" FixedToPoint="true">
+      <Path>
+        <Point X="10.875" Y="3.853" />
+        <Point X="10.875" Y="4.122" />
+        <Point X="12.5" Y="4.122" />
+        <Point X="12.5" Y="4.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAEAAAAAAAAmAAAAAAACAAAAAAA=</HashCode>
+      <FileName>App\Menus\UpdateVehicleGarageStateMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ex03.ConsoleUI.App.Menus.Model.MenuItem&lt;TMenuItem&gt;">
+    <Position X="0.5" Y="0.5" Width="3.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="Ex03.ConsoleUI.App.Menus.Model.MenuItem&lt;TMenuItem&gt;.MenuItemChosenEventHandler">
+        <TypeIdentifier>
+          <NewMemberFileName>App\Menus\Model\MenuItem.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAEgAAAAAAEAAAgQIAABIAAAAAAAiA=</HashCode>
+      <FileName>App\Menus\Model\MenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ex03.ConsoleUI.App.Menus.Model.MenuItemGroup&lt;TKey&gt;" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AEIgAAAAAAAQABAQCAAABAQAAAAAAAAECAAAAABQIAA=</HashCode>
+      <FileName>App\Menus\Model\MenuItemGroup.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ex03.ConsoleUI.App.Reflection.ReflectionUtils">
+    <Position X="2.75" Y="5.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>ACAKAAAAAEAAAAAABAAAAAAAggACAAAAAAQAAAAAAAE=</HashCode>
+      <FileName>App\Reflection\ReflectionUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Ex03.ConsoleUI.App.Menus.Model.eMenuItem">
+    <Position X="0.5" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABQAgAAAAAAAQAAAAAAAAAEAIgAAAQAAAAI=</HashCode>
+      <FileName>App\Menus\Model\eMenuItem.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,9 @@
+*.Cache
+*.rar
+*.zip
+*.doc
+*.txt
+
+bin
+obj
+.vs

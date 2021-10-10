@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F8409A53-BCFE-48F8-B214-0E11F683BE38}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>C21_Ex02_Connect4Engine</RootNamespace>
+    <AssemblyName>C21_Ex02_Connect4Engine</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <LangVersion>2</LangVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Api\Collections\HashSet.cs" />
+    <Compile Include="Api\Controller\GameController.cs" />
+    <Compile Include="Api\Controller\PlayerController.cs" />
+    <Compile Include="Api\Game\Board\eBoardToStringOptions.cs" />
+    <Compile Include="Api\Game\Board\IBoard.cs" />
+    <Compile Include="Api\Game\Engine\IBoardGameEngine.cs" />
+    <Compile Include="Api\Game\Exceptions\GameEngineException.cs" />
+    <Compile Include="Api\Game\Exceptions\IllegalConnectBoardException.cs" />
+    <Compile Include="Api\Game\Exceptions\IllegalPlayerMoveException.cs" />
+    <Compile Include="Api\Game\Player\eAiLevel.cs" />
+    <Compile Include="Api\Game\Player\IBot.cs" />
+    <Compile Include="Api\Game\Player\IPlayer.cs" />
+    <Compile Include="Api\Matrix\IMatrix.cs" />
+    <Compile Include="Api\Matrix\Index.cs" />
+    <Compile Include="Core\Game\Action\ActionContext.cs" />
+    <Compile Include="Core\Game\Action\ActionExecutor.cs" />
+    <Compile Include="Core\Game\Action\ActionFactory.cs" />
+    <Compile Include="Core\Game\Action\eActionType.cs" />
+    <Compile Include="Core\Game\Action\Impl\IActionAny.cs" />
+    <Compile Include="Core\Game\Action\Impl\AAction.cs" />
+    <Compile Include="Api\Game\Action\IActionKeeper.cs" />
+    <Compile Include="Core\Game\Action\Impl\PlayerMoveAction.cs" />
+    <Compile Include="Core\Game\Board\ABoard.cs" />
+    <Compile Include="Core\Game\Board\ConnectBoard.cs" />
+    <Compile Include="Core\Game\Engine\ConnectFourGameEngine.cs" />
+    <Compile Include="Core\Game\Engine\IInternalBoardGameEngine.cs" />
+    <Compile Include="Core\Game\Player\BotAi.cs" />
+    <Compile Include="Core\Game\Player\BotRandom.cs" />
+    <Compile Include="Core\Game\Player\Player.cs" />
+    <Compile Include="Core\Matrix\Matrix.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
