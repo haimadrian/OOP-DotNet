@@ -34,7 +34,7 @@ namespace ZipSolutionForGuy
 			DirectoryCopy(solutionDir, 
 						  destinationDir, 
 						  directory => directory.Name != "obj" && directory.Name != "bin" && directory.Name != ".vs",
-						  file => file.Extension != ".Cache" && file.Extension != ".StyleCop" && file.Extension != ".editorconfig");
+						  file => file.Extension != ".Cache" && file.Extension != ".StyleCop" && file.Extension != ".editorconfig" && file.Extension != ".DotSettings" && file.Extension != ".user");
 
 			Console.WriteLine($"Solution copied to: {destinationDir}");
 
